@@ -541,8 +541,10 @@ def main():
     with tab1:
         # Lógica del flujo de preguntas
         if st.session_state.step == 0:
-            progress_bar = st.progress(0, text="Progreso del cuestionario")
-            progress_bar.progress(25, text="Paso 1 de 3")
+            progress_text = "Paso 1 de 3"
+            progress_bar = st.progress(0, text=progress_text)
+            progress_bar.progress(25, text=progress_text)
+            
             st.markdown(
                 "<p style='text-align: center; font-size: 1.2rem;'>"
                 "<b>¡Bienvenido!</b> Empecemos a encontrar tu perfume ideal en 3 sencillos pasos"
@@ -570,4 +572,4 @@ def main():
             st.markdown("</div>", unsafe_allow_html=True)
 
         elif st.session_state.step == 1:
-            progress_bar = st.progress(0, text="P
+        
