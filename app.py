@@ -1,7 +1,6 @@
 import pandas as pd
 import streamlit as st
 import random
-from streamlit_searchbox import st_searchbox
 
 # --- CONFIGURACIÓN DE LA PÁGINA ---
 st.set_page_config(
@@ -476,30 +475,24 @@ def score_perfumes(df, user_prefs):
     return df.sort_values(by='score', ascending=False)
 
 # --- FUNCIÓN PARA BÚSQUEDA AUTOMÁTICA ---
-def search_perfumes(search_term, df):
-    if not search_term:
-        return []
-    
+def get_search_options(df):
     options = []
+    # Opciones de nombres de perfumes
+    for nombre in df['Nombre'].unique():
+        options.append(f"👑 {nombre}")
     
-    # Buscar por nombre
-    name_results = df[df['Nombre'].str.contains(search_term, case=False)]
-    for _, row in name_results.iterrows():
-        options.append(f"👑 {row['Nombre']} - {row['Marca']}")
+    # Opciones de marcas
+    for marca in df['Marca'].unique():
+        options.append(f"🏷️ {marca}")
     
-    # Buscar por marca
-    brand_results = df[df['Marca'].str.contains(search_term, case=False)]
-    for _, row in brand_results.iterrows():
-        options.append(f"🏷️ {row['Marca']} - {row['Nombre']}")
+    # Opciones de notas
+    all_notes = set()
+    for notes_list in df['Notas']:
+        all_notes.update(notes_list)
+    for note in all_notes:
+        options.append(f"🌸 {note.capitalize()}")
     
-    # Buscar por notas
-    note_results = df[df['Notas'].apply(lambda notes: any(search_term in note for note in notes))]
-    for _, row in note_results.iterrows():
-        notes_str = ", ".join(row['Notas'])
-        options.append(f"🌸 {row['Nombre']} ({notes_str})")
-    
-    # Eliminar duplicados y limitar resultados
-    return list(set(options))[:10]
+    return options
 
 # --- LÓGICA PRINCIPAL DE LA APLICACIÓN ---
 def main():
@@ -566,4 +559,12 @@ def main():
                     st.session_state.step = 1
                     st.rerun()
             with col3:
-                if
+                if st.button("Unisex", key="unisex", use_container_width=True):
+                    st.session_state.prefs['Género'] = 'Unisex'
+                    st.session_state.step = 1
+                    st.rerun()
+            st.markdown("</div>", unsafe_allow_html=True)
+
+        elif st.session_state.step == 1:
+            progress_bar.progress(50, text="Paso 2 de 3")
+            st.markdown("<p style='text-align: center; font-size: 1.2re
