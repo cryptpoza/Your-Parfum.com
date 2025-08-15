@@ -3,45 +3,35 @@ import streamlit as st
 import random
 
 # Configuración de la página
-st.set_page_config(page_title="YourParfum", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(
+    page_title="YourParfum",
+    layout="wide",
+    initial_sidebar_state="collapsed",
+    page_icon="🌸"
+)
 
-# Estilo para la fuente y el color (estilo minimalista de Zara)
+# Estilo para el diseño formal y minimalista
 st.markdown("""
     <style>
-    body {
-        font-family: sans-serif;
-        color: #1a1a1a;
-        background-color: #f7f7f7;
+    .main {
+        background-color: #fcfcfc;
+        color: #222222;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Georgia', serif;
+        font-weight: 300;
+        color: #000000;
+    }
+    
     .st-emotion-cache-1jmveez, .st-emotion-cache-1jmveez.e1fqp12o1 {
         background-color: #ffffff;
         border-radius: 0px;
         border: 1px solid #e0e0e0;
+        box-shadow: none;
     }
-    .st-emotion-cache-1jmveez {
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
-    }
-    h1, h2, h3, h4, h5, h6 {
-        color: #000000;
-        font-weight: 400;
-    }
-    h1 {
-        font-size: 2.5em;
-        text-transform: uppercase;
-        letter-spacing: 0.2em;
-    }
-    h2 {
-        font-size: 1.5em;
-        font-weight: 300;
-        margin-top: 1em;
-    }
-    p {
-        color: #555555;
-    }
-    .st-emotion-cache-79elbk {
-        color: #000000;
-        font-weight: bold;
-    }
+    
     .st-emotion-cache-1r65h9z {
         border: 1px solid #000000;
         background-color: #ffffff;
@@ -49,30 +39,53 @@ st.markdown("""
         padding: 10px 20px;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        font-weight: bold;
+        font-weight: 500;
+        transition: all 0.2s ease;
     }
+    
     .st-emotion-cache-1r65h9z:hover {
         background-color: #000000;
         color: #ffffff;
     }
+
     .stRadio > label {
-        font-weight: bold;
+        font-weight: normal;
         color: #000000;
+        font-family: 'Georgia', serif;
     }
+    
     .stRadio [data-baseweb="radio"] {
-        background-color: #ffffff;
+        border-color: #000000;
     }
+    
     .stRadio [data-baseweb="radio"]:checked {
+        border-color: #000000;
         background-color: #000000;
     }
+
+    .stSelectbox > label, .stSlider > label {
+        color: #000000;
+        font-weight: normal;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
     .stWarning {
-        background-color: #f5f5f5;
-        border-left: 5px solid #cccccc;
+        background-color: transparent;
+        border: none;
         color: #555555;
         font-style: italic;
+        padding-left: 0;
+        border-left: none;
     }
+    
     .stWarning .st-emotion-cache-1dkeo0u {
-        color: #555555;
+        display: none;
+    }
+    
+    .st-emotion-cache-e1nz1l x {
+        text-align: center;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -92,14 +105,9 @@ except FileNotFoundError:
     st.stop()
 
 # Logo y título
-col_logo, col_title = st.columns([1, 4])
-with col_logo:
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Perfume-bottle-icon.svg/1200px-Perfume-bottle-icon.svg.png", width=100)
-with col_title:
-    st.title("YourParfum")
-    st.markdown("---")
-    st.markdown("<h2 style='text-align: left; margin-top: -20px; font-weight: 300;'>Encuentra tu perfume ideal.</h2>", unsafe_allow_html=True)
-
+st.markdown("<h1 style='text-align: center; font-size: 3em;'>YourParfum</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; font-weight: 300;'>Encuentra tu aroma perfecto.</h3>", unsafe_allow_html=True)
+st.markdown("---")
 
 # Selección de modo
 st.markdown("<br>", unsafe_allow_html=True)
@@ -112,7 +120,7 @@ modo = st.radio(
 st.markdown("---")
 
 if modo == "Guía Personalizada":
-    st.header("✨ Guía Personalizada")
+    st.header("Guía Personalizada")
 
     with st.form("guia_form"):
         aroma_preferido = st.selectbox("1. ¿Qué tipo de aroma te atrae más?", tipos_aroma[1:])
@@ -130,8 +138,9 @@ if modo == "Guía Personalizada":
             (df['Precio (€)'] <= presupuesto)
         ]
         
+        st.markdown("<h3 style='text-align: center;'>Resultados</h3>", unsafe_allow_html=True)
+
         if not resultados.empty:
-            st.markdown("<h3 style='text-align: center;'>🎉 ¡Hemos encontrado tu perfume ideal!</h3>", unsafe_allow_html=True)
             resultados_finales = resultados.sample(min(3, len(resultados)))
             
             for _, row in resultados_finales.iterrows():
@@ -162,7 +171,7 @@ if modo == "Guía Personalizada":
                     st.markdown("---")
 
 elif modo == "Explorar por Filtros":
-    st.header("🔍 Explorar por Filtros")
+    st.header("Explorar por Filtros")
     
     selected_marca = st.selectbox("Elige una marca:", marcas)
     selected_tipo = st.selectbox("Elige el tipo de aroma:", tipos_aroma)
@@ -226,3 +235,4 @@ elif modo == "Explorar por Filtros":
 
 st.markdown("---")
 st.markdown('<p style="text-align: center; color: grey;">Creado por Miguel Poza</p>', unsafe_allow_html=True)
+        
