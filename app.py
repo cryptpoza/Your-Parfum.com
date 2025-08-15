@@ -539,10 +539,9 @@ def main():
     
     # --- PESTAÑA 1: GUÍA PERSONALIZADA ---
     with tab1:
-        progress_bar = st.progress(0, text="Progreso del cuestionario")
-        
         # Lógica del flujo de preguntas
         if st.session_state.step == 0:
+            progress_bar = st.progress(0, text="Progreso del cuestionario")
             progress_bar.progress(25, text="Paso 1 de 3")
             st.markdown(
                 "<p style='text-align: center; font-size: 1.2rem;'>"
@@ -571,4 +570,4 @@ def main():
             st.markdown("</div>", unsafe_allow_html=True)
 
         elif st.session_state.step == 1:
-            progress_bar.progress(50, text="
+            progress_bar = st.progress(0, text="P
