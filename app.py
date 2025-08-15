@@ -93,6 +93,7 @@ st.markdown("""
 # Cargar el CSV
 try:
     df = pd.read_csv('perfumes.csv')
+    generos = ['Hombre', 'Mujer', 'Unisex']
     marcas = ['Todas'] + sorted(df['Marca'].unique().tolist())
     tipos_aroma = ['Cualquiera'] + sorted(df['Tipo de aroma'].unique().tolist())
     intensidades = ['Cualquiera'] + sorted(df['Intensidad'].unique().tolist())
@@ -109,8 +110,16 @@ st.markdown("<h1 style='text-align: center; font-size: 3em;'>YourParfum</h1>", u
 st.markdown("<h3 style='text-align: center; font-weight: 300;'>Encuentra tu aroma perfecto.</h3>", unsafe_allow_html=True)
 st.markdown("---")
 
+# Nuevo filtro de género al inicio
+selected_genero = st.radio(
+    "Selecciona el género:",
+    generos,
+    horizontal=True
+)
+
+st.markdown("---")
+
 # Selección de modo
-st.markdown("<br>", unsafe_allow_html=True)
 modo = st.radio(
     "Selecciona el modo de búsqueda:",
     ("Guía Personalizada", "Explorar por Filtros"),
@@ -132,6 +141,7 @@ if modo == "Guía Personalizada":
 
     if submitted:
         resultados = df[
+            (df['Género'].isin([selected_genero, 'Unisex'])) &
             (df['Tipo de aroma'] == aroma_preferido) &
             (df['Ocasión'] == ocasion_uso) &
             (df['Intensidad'] == intensidad_preferida) &
@@ -152,11 +162,13 @@ if modo == "Guía Personalizada":
                     st.markdown(f"**{row['Nombre']}** - {row['Marca']}")
                     st.write(f"💰 Precio: {row['Precio (€)']}€")
                     st.write(f"💎 Dupe: **{row['Dupe barato']}**")
-                    st.markdown(f"[🛒 Comprar dupe]({row['Enlace dupe']})")
+                    
+                    st.markdown(f"🛒 [Comprar Original]({row['Enlace original']})")
+                    st.markdown(f"🛒 [Comprar Dupe]({row['Enlace dupe']})")
                     st.markdown("---")
         else:
             st.warning("No encontramos perfumes con esos criterios. Aquí tienes una recomendación popular:")
-            recomendacion_popular = df.sample(min(3, len(df)))
+            recomendacion_popular = df.sample(min(3, len(df))]
             
             for _, row in recomendacion_popular.iterrows():
                 st.markdown("<br>", unsafe_allow_html=True)
@@ -167,7 +179,8 @@ if modo == "Guía Personalizada":
                     st.markdown(f"**{row['Nombre']}** - {row['Marca']}")
                     st.write(f"💰 Precio: {row['Precio (€)']}€")
                     st.write(f"💎 Dupe: **{row['Dupe barato']}**")
-                    st.markdown(f"[🛒 Comprar dupe]({row['Enlace dupe']})")
+                    st.markdown(f"🛒 [Comprar Original]({row['Enlace original']})")
+                    st.markdown(f"🛒 [Comprar Dupe]({row['Enlace dupe']})")
                     st.markdown("---")
 
 elif modo == "Explorar por Filtros":
@@ -182,6 +195,7 @@ elif modo == "Explorar por Filtros":
     presupuesto = st.slider("Presupuesto máximo (€):", min_value=10, max_value=300, value=150, step=5)
 
     filtros = (df['Precio (€)'] <= presupuesto)
+    filtros &= (df['Género'].isin([selected_genero, 'Unisex']))
     if selected_marca != 'Todas':
         filtros &= (df['Marca'] == selected_marca)
     if selected_tipo != 'Cualquiera':
@@ -228,11 +242,12 @@ elif modo == "Explorar por Filtros":
                         st.write(f"*{row['Marca']}*")
                         st.write(f"💰 Precio: {row['Precio (€)']}€")
                         st.write(f"💎 Dupe: **{row['Dupe barato']}**")
-                        st.markdown(f"[🛒 Comprar dupe]({row['Enlace dupe']})")
+                        st.markdown(f"🛒 [Comprar Original]({row['Enlace original']})")
+                        st.markdown(f"🛒 [Comprar Dupe]({row['Enlace dupe']})")
                         st.markdown("---")
     else:
         st.warning("No encontramos perfumes con esos criterios. Prueba a cambiar los filtros.")
 
 st.markdown("---")
 st.markdown('<p style="text-align: center; color: grey;">Creado por Miguel Poza</p>', unsafe_allow_html=True)
-        
+            
