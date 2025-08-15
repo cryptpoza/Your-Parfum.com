@@ -32,15 +32,87 @@ def load_data(file_path):
 
 # --- FUNCIÓN PARA MOSTRAR UNA TARJETA DE PERFUME REFINADA ---
 def display_perfume_card(perfume, show_details=False):
-    # ... (implementación permanece igual) ...
+    with st.container():
+        # Estructura de la tarjeta
+        st.markdown(f"<div class='perfume-card'>", unsafe_allow_html=True)
+        
+        # Encabezado con nombre y marca
+        st.markdown(f"<h3>{perfume['Nombre']}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<p class='perfume-brand'>{perfume['Marca']}</p>", unsafe_allow_html=True)
+        
+        # Imagen (si existe)
+        if 'Imagen' in perfume and pd.notna(perfume['Imagen']):
+            st.image(perfume['Imagen'], width=150)
+        
+        # Detalles básicos
+        st.markdown(f"<p><b>Género:</b> {perfume['Género']}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p><b>Precio:</b> €{perfume['Precio (€)']}</p>", unsafe_allow_html=True)
+        
+        # Detalles expandidos
+        if show_details:
+            st.markdown(f"<p><b>Tipo de aroma:</b> {perfume['Tipo de aroma']}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p><b>Intensidad:</b> {perfume['Intensidad']}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p><b>Ocasión:</b> {perfume['Ocasión']}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p><b>Notas:</b> {', '.join(perfume['Notas'])}</p>", unsafe_allow_html=True)
+        
+        # Botones de acción
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("Ver Original", key=f"original_{perfume['Nombre']}", use_container_width=True):
+                st.switch_page(perfume['Link Original'])
+        with col2:
+            if pd.notna(perfume.get('Link Dupe')):
+                if st.button("Ver Dupe", key=f"dupe_{perfume['Nombre']}", use_container_width=True):
+                    st.switch_page(perfume['Link Dupe'])
+        
+        st.markdown("</div>", unsafe_allow_html=True)
 
 # --- ALGORITMO DE PUNTUACIÓN (SCORING) ---
 def score_perfumes(df, user_prefs):
-    # ... (implementación permanece igual) ...
+    # Filtrar por presupuesto
+    df = df[df['Precio (€)'] <= user_prefs['Presupuesto']]
+    
+    # Inicializar columna de puntuación
+    df['puntuacion'] = 0
+    
+    # Puntos por tipo de aroma
+    df.loc[df['Tipo de aroma'] == user_prefs['Tipo de aroma'], 'puntuacion'] += 10
+    
+    # Puntos por intensidad
+    df.loc[df['Intensidad'] == user_prefs['Intensidad'], 'puntuacion'] += 8
+    
+    # Puntos por ocasión
+    df.loc[df['Ocasión'] == user_prefs['Ocasión'], 'puntuacion'] += 8
+    
+    # Puntos por notas
+    if user_prefs['Notas']:
+        for note in user_prefs['Notas']:
+            df['puntuacion'] += df['Notas'].apply(lambda notes: 3 if note in notes else 0)
+    
+    # Puntos por popularidad
+    df['puntuacion'] += df['Popularidad'] * 0.01
+    
+    # Ordenar por puntuación
+    df = df.sort_values('puntuacion', ascending=False)
+    
+    return df
 
 # --- FUNCIÓN PARA BÚSQUEDA AUTOMÁTICA ---
 def get_search_options(df):
-    # ... (implementación permanece igual) ...
+    options = []
+    # Nombres de perfumes
+    for nombre in df['Nombre'].unique():
+        options.append(f"👑 {nombre}")
+    # Marcas
+    for marca in df['Marca'].unique():
+        options.append(f"🏷️ {marca}")
+    # Notas
+    all_notes = set()
+    for note_list in df['Notas']:
+        all_notes.update(note_list)
+    for note in all_notes:
+        options.append(f"🌸 {note}")
+    return options
 
 # --- LÓGICA PRINCIPAL DE LA APLICACIÓN ---
 def main():
@@ -348,33 +420,4 @@ def main():
         Nuestro sistema de recomendación utiliza un algoritmo avanzado que analiza múltiples factores:
         
         - **Preferencias personales**: Tipo de aroma, intensidad, ocasión y notas favoritas
-        - **Características del perfume**: Pirámide olfativa, popularidad y relación calidad-precio
-        - **Comportamiento de usuarios similares**: Elecciones de usuarios con gustos afines
-        
-        **Transparencia en recomendaciones:**
-        
-        Cada sugerencia incluye una explicación detallada de por qué se recomienda ese perfume específico, basada en tus respuestas al cuestionario.
-        
-        **Fuente de datos:**
-        
-        Nuestra base de datos contiene información de más de 30 perfumes de lujo y sus alternativas, obtenida de:
-        - Sitios oficiales de marcas
-        - Comunidades de entusiastas de perfumes
-        - Reseñas verificadas de usuarios
-        
-        **Política de afiliados:**
-        
-        Los enlaces "Ver Original" y "Ver Dupe" pueden ser enlaces de afiliados. Esto significa que si realizas una compra a través de estos enlaces, recibimos una pequeña comisión sin costo adicional para ti. Estos ingresos nos ayudan a mantener y mejorar la aplicación.
-        """)
-
-    # --- PIE DE PÁGINA ---
-    st.markdown("---")
-    st.markdown("""
-    <div style="text-align: center; color: grey; padding: 20px 0;">
-        <p>Creado por Miguel Poza con 🖤 | YourParfum © 2025</p>
-        <p><a href="#">Política de Privacidad</a> | <a href="#">Términos de Servicio</a> | <a href="#">Aviso de Cookies</a></p>
-    </div>
-    """, unsafe_allow_html=True)
-
-if __name__ == "__main__":
-    main()
+        - **Cara
