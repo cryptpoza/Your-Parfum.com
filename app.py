@@ -544,7 +544,12 @@ def main():
         # Lógica del flujo de preguntas
         if st.session_state.step == 0:
             progress_bar.progress(25, text="Paso 1 de 3")
-            st.markdown("<p style='text-align: center; font-size: 1.2rem;'><b>¡Bienvenido!</b> Empecemos a encontrar tu perfume ideal en 3 sencillos pasos</p>", unsafe_allow_html=True)
+            st.markdown(
+                "<p style='text-align: center; font-size: 1.2rem;'>"
+                "<b>¡Bienvenido!</b> Empecemos a encontrar tu perfume ideal en 3 sencillos pasos"
+                "</p>", 
+                unsafe_allow_html=True
+            )
             
             st.markdown("<div class='gender-buttons'>", unsafe_allow_html=True)
             col1, col2, col3 = st.columns(3)
@@ -566,5 +571,4 @@ def main():
             st.markdown("</div>", unsafe_allow_html=True)
 
         elif st.session_state.step == 1:
-            progress_bar.progress(50, text="Paso 2 de 3")
-            st.markdown("<p style='text-align: center; font-size: 1.2re
+            progress_bar.progress(50, text="
