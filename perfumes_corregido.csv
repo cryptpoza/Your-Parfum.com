@@ -1,33 +1,390 @@
-Nombre,Marca,Tipo de aroma,Intensidad,Ocasión,Notas,Precio (€),Imagen (URL),Dupe barato,Enlace dupe,Género,Enlace original
-Dior Sauvage,Dior,Amaderado,Intensa,Noche/Citas,"Pimienta, Bergamota, Ámbar",110,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/Y0685240_F068524009_background_ZHC.png,Maison Alhambra Salvo,https://amzn.to/3W3sYf3,Hombre,https://amzn.to/4b1C8vC
-Bleu de Chanel,Chanel,Amaderado,Moderada,Oficina/Diario,"Cítricos, Cedro, Incienso",120,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/bleu-de-chanel-parfum-spray-3-4fl-oz--packshot-default-107180-9564892200990.png,Maison Alhambra Blue De Chance,https://amzn.to/3K8qJbH,Hombre,https://amzn.to/3K5a3uT
-Y Eau de Parfum,Yves Saint Laurent,Fougère,Intensa,Noche/Salidas,"Jengibre, Salvia, Bergamota",100,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/y-edp-1644222031.png,Lattafa Fakhar Black,https://amzn.to/4d41a6w,Hombre,https://amzn.to/3QAbGtl
-Acqua di Gio,Giorgio Armani,Cítrico,Sutil,Diario/Verano,"Notas marinas, Bergamota, Neroli",80,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/acqua-di-gio-edp-1642410382.png,Maison Alhambra Porto Neroli,https://amzn.to/3QAbO3a,Hombre,https://amzn.to/3y4g1aE
-Aventus,Creed,Chipre,Intensa,Eventos/Especial,"Piña, Bergamota, Manzana, Musgo",300,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/aventus2.png,Armaf Club de Nuit Intense Man,https://amzn.to/4aXmS4v,Hombre,https://amzn.to/4aZuSjM
-Eros,Versace,Aromático,Intensa,Noche/Club,"Menta, Manzana verde, Vainilla",75,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/90_R740111-R200MLS_RNUL_20_ErosEDP200ml-Eros-Versace-online-store_0_3.jpg,Lattafa Ramz Silver,https://amzn.to/4aZuZhE,Hombre,https://amzn.to/3y4gjfE
-One Million,Paco Rabanne,Amaderado,Intensa,Noche/Citas,"Pomelo, Menta, Cuero",90,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/428.jpg,Lattafa Ramz Silver,https://amzn.to/4aZuZhE,Hombre,https://amzn.to/4aXmXyP
-Invictus,Paco Rabanne,Aromático,Moderada,Diario/Verano,"Notas marinas, Pomelo, Hoja de laurel",70,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/375x500.18471.jpg,Maison Alhambra Victorioso,https://amzn.to/4d2uE0v,Hombre,https://amzn.to/4aZnfLq
-Code,Giorgio Armani,Oriental,Moderada,Noche/Citas,"Bergamota, Limón, Anís, Haba Tonka",95,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/o.75126.jpg,Maison Alhambra Code Uno,https://amzn.to/3VZrwP3,Hombre,https://amzn.to/3wWJ5aH
-La Nuit de l'Homme,Yves Saint Laurent,Especiado,Intensa,Noche/Citas,"Cardamomo, Lavanda, Cedro",98,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/o.5521.jpg,Lattafa Oud For Glory,https://amzn.to/4aWzV58,Hombre,https://amzn.to/3K7sNfF
-Spicebomb Extreme,Viktor & Rolf,Especiado,Intensa,Noche/Invierno,"Tabaco, Vainilla, Comino",120,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/o.30499.jpg,Maison Alhambra Tobacco Touch,https://amzn.to/4aZv8k5,Hombre,https://amzn.to/4d41pBw
-Chanel No. 5,Chanel,Floral,Sutil,Oficina/Diario,"Aldehídos, Jazmín, Rosa",130,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/o.28711.jpg,Divain-106,https://divainparfums.es/products/divain-106-perfume-equivalente-a-n-5-de-chanel,Mujer,https://amzn.to/4aYh4X5
-Angel,Thierry Mugler,Gourmand,Intensa,Noche/Frio,"Bergamota, Pachulí, Chocolate",105,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/o.704.jpg,Divain-065,https://divainparfums.es/products/divain-065-perfume-equivalente-a-angel-de-thierry-mugler,Mujer,https://amzn.to/4b1D3pX
-Black Opium,Yves Saint Laurent,Floral,Intensa,Noche/Citas,"Café, Vainilla, Pachulí",95,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/187.jpg,Maison Alhambra Opera Noir,https://amzn.to/4aZvj9g,Mujer,https://amzn.to/4aXmZBa
-Miss Dior,Dior,Floral,Moderada,Diario/Primavera,"Rosa, Jazmín, Pachulí",100,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/o.68905.jpg,Divain-582,https://divainparfums.es/products/divain-582-perfume-equivalente-a-miss-dior-de-dior,Mujer,https://amzn.to/4d41sZz
-Coco Mademoiselle,Chanel,Floral,Intensa,Noche/Citas,"Naranja, Rosa, Pachulí",120,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/375x500.48310.jpg,Maison Alhambra Coco Fleur,https://amzn.to/4aYhizL,Mujer,https://amzn.to/3wY7q0T
-La Vie Est Belle,Lancôme,Floral,Intensa,Diario/Otoño,"Iris, Pachulí, Vainilla",90,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/o.14982.jpg,Maison Alhambra La Vita Bella,https://amzn.to/3wY7tN1,Mujer,https://amzn.to/4aYhn4b
-Good Girl,Carolina Herrera,Floral,Intensa,Noche/Citas,"Almendra, Jazmín, Cacao",95,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/375x500.39681.jpg,Maison Alhambra Miss Alhambra,https://amzn.to/3y4gsLI,Mujer,https://amzn.to/4aZvrvJ
-My Way,Giorgio Armani,Floral,Moderada,Diario/Verano,"Bergamota, Nardos, Vainilla",90,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/o.62036.jpg,Zara Sublime Epoque,https://www.zara.com/es/es/sublime-epoque-90-ml-p20210332.html,Mujer,https://amzn.to/3wX8k2U
-Libre,Yves Saint Laurent,Floral,Moderada,Oficina/Otoño,"Lavanda, Jazmín, Azahar",98,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/o.56077.jpg,Zara Golden Decade,https://www.zara.com/es/es/golden-decade-80-ml-p20210330.html,Mujer,https://amzn.to/3K7sYq9
-Sauvage Elixir,Dior,Amaderado,Intensa,Noche/Invierno,"Canela, Nuez moscada, Cardamomo",140,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/o.68415.jpg,Lattafa Asad,https://amzn.to/4aWAdU9,Hombre,https://amzn.to/3K5aipM
-Terre d'Hermès,Hermès,Amaderado,Moderada,Oficina/Diario,"Naranja, Pomelo, Pimienta",100,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/375x500.17.jpg,Maison Alhambra The Artist No. 2,https://amzn.to/3wY7F81,Hombre,https://amzn.to/4d4h2dI
-Dior Homme Intense,Dior,Floral,Intensa,Noche/Citas,"Iris, Vainilla, Cedro",115,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/o.13016.jpg,Maison Alhambra Woody Oud,https://amzn.to/4d11q9t,Hombre,https://amzn.to/4b1DBp7
-The One for Men,Dolce & Gabbana,Oriental,Intensa,Noche/Citas,"Pomelo, Jengibre, Tabaco",90,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/375x500.31909.jpg,Maison Alhambra The Tux,https://amzn.to/3wX8vUb,Hombre,https://amzn.to/3y4gN9C
-Black Orchid,Tom Ford,Oriental,Intensa,Noche/Invierno,"Trufa, Gardenia, Orquídea",140,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/o.1018.jpg,Maison Alhambra Orchid Noir,https://amzn.to/3wWJdjp,Unisex,https://amzn.to/4aZvvds
-By the Fireplace,Maison Margiela,Amaderado,Intensa,Noche/Invierno,"Clavo, Castaña, Vainilla",115,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/375x500.31623.jpg,Maison Alhambra Kismet Angel,https://amzn.to/4aYhB8g,Unisex,https://amzn.to/4aYhCqF
-Tobacco Vanille,Tom Ford,Oriental,Intensa,Noche/Invierno,"Tabaco, Vainilla, Cacao",200,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/TomFordTobaccoVanille_0d35f2f7-0fcb-48f7-aa7c-82df5686771e.jpg,Maison Alhambra Tobacco Touch,https://amzn.to/4aZv8k5,Unisex,https://amzn.to/4aWzP9v
-Oud Wood,Tom Ford,Amaderado,Intensa,Noche/Otoño,"Palo de rosa, Cardamomo, Oud",180,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/375x500.89988.jpg,Maison Alhambra Woody Oud,https://amzn.to/4d11q9t,Unisex,https://amzn.to/4b1DImk
-Light Blue,Dolce & Gabbana,Cítrico,Moderada,Diario/Verano,"Limón, Bambú, Manzana",78,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/208671-2.jpg,Maison Alhambra Versencia Oro,https://amzn.to/3wX8F9s,Mujer,https://amzn.to/4aZvB9z
-J'adore,Dior,Floral,Moderada,Diario/Primavera,"Ylang-Ylang, Jazmín, Rosa",110,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/375x500.10371.jpg,Zara Rose,https://www.zara.com/es/es/rose-90-ml-p20210243.html,Mujer,https://amzn.to/3K7tl9S
-Flowerbomb,Viktor & Rolf,Floral,Intensa,Noche/Otoño,"Té, Bergamota, Jazmín",105,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/o.1460.jpg,Divain-071,https://divainparfums.es/products/divain-071-perfume-equivalente-a-flowerbomb-de-viktor-rolf,Mujer,https://amzn.to/4d41E0z
-Si,Giorgio Armani,Chipre,Moderada,Oficina/Diario,"Cassis, Fresia, Rosa",100,https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/assets/armani-si-edp.jpg,Divain-136,https://divainparfums.es/products/divain-136-perfume-equivalente-a-si-de-giorgio-armani,Mujer,https://amzn.to/3K5an7N
+import pandas as pd
+import streamlit as st
+import random
+
+# --- CONFIGURACIÓN DE LA PÁGINA ---
+st.set_page_config(
+    page_title="YourParfum",
+    page_icon="🌸",
+    layout="wide",
+    initial_sidebar_state="collapsed",
+)
+
+# --- ESTILOS CSS PARA UN DISEÑO PROFESIONAL Y MINIMALISTA ---
+def load_css():
+    st.markdown("""
+    <style>
+        /* --- FUENTES Y COLORES BASE --- */
+        html, body, [class*="st-"] {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #FFFFFF; /* Fondo blanco puro */
+            color: #1a1a1a; /* Negro suave para texto */
+        }
+
+        /* --- TÍTULOS Y CABECERAS --- */
+        h1, h2, h3 {
+            font-family: 'Garamond', 'Georgia', serif; /* Fuente más elegante */
+            font-weight: 400;
+            color: #000000;
+        }
+        
+        /* --- LAYOUT PRINCIPAL --- */
+        .main .block-container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            padding-left: 5rem;
+            padding-right: 5rem;
+        }
+        
+        /* Contenedor de la guía personalizada para centrarla */
+        .guide-container {
+            width: 70%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* --- BARRA DE BÚSQUEDA --- */
+        div.stTextInput>div>div>input {
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        div.stTextInput>div>div>input:focus {
+            border-color: #000;
+            box-shadow: none;
+        }
+
+        /* --- TARJETA DE PRODUCTO REFINADA --- */
+        .perfume-card {
+            border: none; /* Sin bordes para un look más limpio */
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+        }
+        .perfume-card:hover {
+            transform: scale(1.02);
+        }
+        .perfume-card img {
+            max-height: 200px;
+            margin-bottom: 20px;
+        }
+        .perfume-name {
+            font-size: 1.1em;
+            font-weight: 500; /* Letra más fina */
+            color: #000;
+            text-transform: uppercase; /* MAYÚSCULAS como en Zara */
+            letter-spacing: 0.05em;
+        }
+        .perfume-brand {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+        
+        /* Estilo refinado para el precio */
+        .perfume-price {
+            font-size: 1.1em;
+            font-weight: 400;
+            color: #000;
+            margin-bottom: 20px;
+        }
+        
+        /* Notas Olfativas */
+        .perfume-notes {
+            font-size: 0.8em;
+            color: #888;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        /* Nueva sección para el dupe, sin fondo y minimalista */
+        .dupe-section {
+            border-top: 1px solid #eee; /* Un separador sutil */
+            padding-top: 15px;
+            margin-top: 20px;
+        }
+        .dupe-title {
+            font-size: 0.8em;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .dupe-name {
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        /* --- BOTONES MINIMALISTAS --- */
+        a.buy-button {
+            display: block; width: 100%; text-align: center; text-decoration: none;
+            border-radius: 0; /* Sin bordes redondeados */
+            padding: 12px 0; margin-top: 8px; font-weight: 500;
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+        }
+        a.original-button {
+            border: 1px solid #000;
+            background-color: transparent;
+            color: #000;
+        }
+        a.original-button:hover {
+            background-color: #000;
+            color: #fff;
+        }
+        a.dupe-button {
+            border: 1px solid #000;
+            background-color: #000;
+            color: #fff;
+        }
+        a.dupe-button:hover {
+            background-color: #333;
+            border-color: #333;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+# --- CARGA Y PROCESAMIENTO DE DATOS ---
+@st.cache_data
+def load_data(file_path):
+    try:
+        df = pd.read_csv(file_path)
+        
+        # Procesar la columna de notas
+        df['Notas'] = df['Notas'].astype(str).str.split(',').apply(lambda x: [item.strip().lower() for item in x])
+        
+        # Añadir columna 'Estación' derivada de 'Ocasión' para un filtrado más inteligente
+        def extract_season(occasion):
+            occasion = str(occasion).lower()
+            if 'verano' in occasion: return 'Verano'
+            if 'invierno' in occasion: return 'Invierno'
+            if 'otoño' in occasion: return 'Otoño'
+            if 'primavera' in occasion: return 'Primavera'
+            return 'Cualquiera'
+        
+        df['Estación'] = df['Ocasión'].apply(extract_season)
+        
+        # Crear una columna de popularidad ficticia para el scoring
+        df['Popularidad'] = df.index.map(lambda i: (len(df) - i) * random.uniform(0.8, 1.2))
+        
+        return df
+    except FileNotFoundError:
+        st.error(f"Error: El archivo '{file_path}' no se encontró. Asegúrate de que el archivo está en la misma carpeta.")
+        return None
+
+# --- FUNCIÓN PARA MOSTRAR UNA TARJETA DE PERFUME ---
+def display_perfume_card(perfume):
+    notes_formatted = ", ".join([note.capitalize() for note in perfume['Notas']])
+    
+    with st.container():
+        st.markdown(f"""
+        <div class="perfume-card">
+            <img src="{perfume['Imagen (URL)']}" alt="{perfume['Nombre']}">
+            <div class="perfume-name">{perfume['Nombre']}</div>
+            <div class="perfume-brand">{perfume['Marca']}</div>
+            
+            <div class="perfume-notes">{notes_formatted}</div>
+
+            <div class="perfume-price">{perfume['Precio (€)']} €</div>
+            
+            <a href="{perfume['Enlace original']}" target="_blank" class="buy-button original-button">Comprar Original</a>
+            
+            <div class="dupe-section">
+                <div class="dupe-title">Alternativa de **{perfume['Nombre']}**</div>
+                <div class="dupe-name">{perfume['Dupe barato']}</div>
+                <a href="{perfume['Enlace dupe']}" target="_blank" class="buy-button dupe-button">Comprar Alternativa</a>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+# --- ALGORITMO DE PUNTUACIÓN (SCORING) ---
+def score_perfumes(df, user_prefs):
+    df['score'] = 0.0
+    
+    # Puntuación base por popularidad
+    df['score'] = df['Popularidad']
+
+    # Puntos por coincidencia de Tipo de aroma
+    df.loc[df['Tipo de aroma'] == user_prefs['Tipo de aroma'], 'score'] += 15
+    
+    # Puntos por coincidencia de Ocasión
+    df.loc[df['Ocasión'].str.contains(user_prefs['Ocasión'], case=False), 'score'] += 10
+    
+    # Puntos por coincidencia de Intensidad
+    df.loc[df['Intensidad'] == user_prefs['Intensidad'], 'score'] += 8
+    
+    # Puntos por coincidencia de Notas
+    def check_notes(row):
+        return sum(1 for note in user_prefs['Notas'] if note.lower() in row['Notas'])
+    df['score'] += df.apply(check_notes, axis=1) * 5
+
+    # Filtro final por presupuesto
+    df = df[df['Precio (€)'] <= user_prefs['Presupuesto']].copy()
+    
+    return df.sort_values(by='score', ascending=False)
+
+# --- LÓGICA PRINCIPAL DE LA APLICACIÓN ---
+def main():
+    load_css()
+    df = load_data('perfumes_corregido.csv')
+
+    if df is None:
+        return
+
+    # --- CABECERA ---
+    st.markdown("<h1 style='text-align: center; font-size: 3.5em;'>YourParfum</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; font-weight: 300; margin-top: -20px;'>Encuentra tu aroma perfecto.</h3>", unsafe_allow_html=True)
+    st.markdown("---")
+    
+    # Inicializar estado de la sesión
+    if 'step' not in st.session_state:
+        st.session_state.step = 0
+        st.session_state.prefs = {}
+        st.session_state.results = pd.DataFrame()
+
+    tab1, tab2 = st.tabs(["✨ Guía Personalizada", "🔎 Explorar Catálogo"])
+    
+    # --- PESTAÑA 1: GUÍA PERSONALIZADA ---
+    with tab1:
+        st.header("Tu Recomendación Ideal")
+        
+        # Lógica del flujo de preguntas
+        if st.session_state.step == 0:
+            st.markdown("<p style='text-align: center;'><b>Paso 1:</b> Para empezar, ¿para quién buscas?</p>", unsafe_allow_html=True)
+            selected_genero = st.radio("", ['Hombre', 'Mujer', 'Unisex'], horizontal=True)
+            if st.button("Siguiente", key="guia_siguiente_1"):
+                st.session_state.prefs['Género'] = selected_genero
+                st.session_state.step = 1
+                st.rerun()
+
+        elif st.session_state.step == 1:
+            st.markdown("<p style='text-align: center;'><b>Paso 2:</b> Ahora, elige el tipo de aroma y la ocasión.</p>", unsafe_allow_html=True)
+            df_genero = df[df['Género'].isin([st.session_state.prefs['Género'], 'Unisex'])].copy()
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.session_state.prefs['Tipo de aroma'] = st.selectbox("Tipo de aroma:", sorted(df_genero['Tipo de aroma'].unique().tolist()))
+            with col2:
+                st.session_state.prefs['Ocasión'] = st.selectbox("Ocasión de uso:", sorted(df_genero['Ocasión'].unique().tolist()))
+                
+            if st.button("Siguiente", key="guia_siguiente_2"):
+                st.session_state.step = 2
+                st.rerun()
+
+        elif st.session_state.step == 2:
+            st.markdown("<p style='text-align: center;'><b>Paso 3:</b> ¿Qué intensidad prefieres y cuál es tu presupuesto?</p>", unsafe_allow_html=True)
+            df_genero = df[df['Género'].isin([st.session_state.prefs['Género'], 'Unisex'])].copy()
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.session_state.prefs['Intensidad'] = st.selectbox("Intensidad preferida:", sorted(df_genero['Intensidad'].unique().tolist()))
+            with col2:
+                st.session_state.prefs['Presupuesto'] = st.slider("Presupuesto máximo (€):", min_value=10, max_value=int(df_genero['Precio (€)'].max()), value=150, step=5)
+            
+            st.info("Opcional: puedes escribir notas que te gusten para afinar la búsqueda.")
+            user_notes = st.text_input("Notas (ej. vainilla, limón):", "")
+            st.session_state.prefs['Notas'] = [note.strip().lower() for note in user_notes.split(',')] if user_notes else []
+
+            if st.button("Ver mi recomendación", key="guia_finalizar"):
+                df_filtrado = df[df['Género'].isin([st.session_state.prefs['Género'], 'Unisex'])].copy()
+                st.session_state.results = score_perfumes(df_filtrado, st.session_state.prefs)
+                st.session_state.step = 3
+                st.rerun()
+
+        elif st.session_state.step == 3:
+            st.header("✨ ¡Aquí está tu perfume ideal! ✨")
+            
+            if not st.session_state.results.empty:
+                cols = st.columns(min(3, len(st.session_state.results)))
+                for i, (idx, perfume) in enumerate(st.session_state.results.iloc[:3].iterrows()):
+                    with cols[i]:
+                        display_perfume_card(perfume)
+                
+                st.markdown("---")
+                st.info("¿No te convence? Prueba a reiniciar la búsqueda.")
+                if st.button("Reiniciar Guía", key="reiniciar_guia"):
+                    st.session_state.step = 0
+                    st.rerun()
+            else:
+                st.warning("No se encontraron perfumes que coincidan con tu búsqueda. Intenta con otros filtros.")
+                if st.button("Reiniciar Guía", key="reiniciar_guia"):
+                    st.session_state.step = 0
+                    st.rerun()
+
+    # --- PESTAÑA 2: EXPLORAR CATÁLOGO ---
+    with tab2:
+        st.header("Explora todo nuestro catálogo")
+
+        # Barra de búsqueda para el catálogo
+        search_term = st.text_input('Busca por nombre, marca o notas olfativas:', '').strip().lower()
+
+        # Filtros del catálogo
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            marcas = ['Todas'] + sorted(df['Marca'].unique().tolist())
+            selected_marca = st.selectbox("Marca:", marcas)
+        with col2:
+            tipos_aroma = ['Cualquiera'] + sorted(df['Tipo de aroma'].unique().tolist())
+            selected_tipo = st.selectbox("Tipo de aroma:", tipos_aroma)
+        with col3:
+            intensidades = ['Cualquiera'] + sorted(df['Intensidad'].unique().tolist())
+            selected_intensidad = st.selectbox("Intensidad:", intensidades)
+        with col4:
+            ocasiones = ['Cualquiera'] + sorted(df['Ocasión'].unique().tolist())
+            selected_ocasion = st.selectbox("Ocasión:", ocasiones)
+        
+        # Aplicar filtros
+        filtros = (df['Género'].isin([st.session_state.prefs.get('Género', 'Hombre'), 'Unisex']))
+        if selected_marca != 'Todas': filtros &= (df['Marca'] == selected_marca)
+        if selected_tipo != 'Cualquiera': filtros &= (df['Tipo de aroma'] == selected_tipo)
+        if selected_intensidad != 'Cualquiera': filtros &= (df['Intensidad'] == selected_intensidad)
+        if selected_ocasion != 'Cualquiera': filtros &= (df['Ocasión'] == selected_ocasion)
+
+        # Filtro de búsqueda global
+        if search_term:
+            filtros &= df.apply(lambda row: 
+                search_term in str(row['Nombre']).lower() or 
+                search_term in str(row['Marca']).lower() or 
+                any(search_term in note.lower() for note in row['Notas']), axis=1)
+
+        resultados = df[filtros]
+
+        st.markdown("---")
+        st.markdown(f"**Perfumes encontrados: {len(resultados)}**")
+
+        if not resultados.empty:
+            resultados_por_pagina = 9
+            total_paginas = (len(resultados) - 1) // resultados_por_pagina + 1
+            if 'page' not in st.session_state: st.session_state.page = 1
+            
+            pag_col1, pag_col2, pag_col3 = st.columns([1,2,1])
+            with pag_col1:
+                if st.button('⬅️ Anterior', key="prev_button") and st.session_state.page > 1:
+                    st.session_state.page -= 1
+                    st.rerun()
+            with pag_col3:
+                if st.button('Siguiente ➡️', key="next_button") and st.session_state.page < total_paginas:
+                    st.session_state.page += 1
+                    st.rerun()
+            with pag_col2:
+                 st.write(f"Página {st.session_state.page} de {total_paginas}")
+
+            start_idx = (st.session_state.page - 1) * resultados_por_pagina
+            end_idx = start_idx + resultados_por_pagina
+            
+            for i in range(start_idx, end_idx, 3):
+                cols = st.columns(3)
+                for j, (idx, row) in enumerate(resultados.iloc[i:i+3].iterrows()):
+                    with cols[j]:
+                        display_perfume_card(row)
+        else:
+            st.warning("No hay perfumes que coincidan con tu búsqueda. Intenta con otros filtros.")
+
+    # --- PIE DE PÁGINA ---
+    st.markdown("---")
+    st.markdown('<p style="text-align: center; color: grey;">Creado por Miguel Poza con 🖤</p>', unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    main()
