@@ -1,253 +1,310 @@
 import pandas as pd
 import streamlit as st
-import random
 
-# Configuración de la página
+# --- CONFIGURACIÓN DE LA PÁGINA ---
 st.set_page_config(
     page_title="YourParfum",
+    page_icon="🌸",
     layout="wide",
     initial_sidebar_state="collapsed",
-    page_icon="🌸"
 )
 
-# Estilo para el diseño formal y minimalista
-st.markdown("""
+# --- ESTILOS CSS PARA UN DISEÑO PROFESIONAL ---
+def load_css():
+    st.markdown("""
     <style>
-    .main {
-        background-color: #fcfcfc;
-        color: #222222;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
+        /* --- FUENTES Y COLORES BASE --- */
+        html, body, [class*="st-"] {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #FFFFFF; /* Fondo blanco puro */
+            color: #1a1a1a; /* Negro suave para texto */
+        }
 
-    h1, h2, h3, h4, h5, h6 {
-        font-family: 'Georgia', serif;
-        font-weight: 300;
-        color: #000000;
-    }
+        /* --- TÍTULOS Y CABECERAS --- */
+        h1, h2, h3 {
+            font-family: 'Garamond', 'Georgia', serif; /* Fuente más elegante */
+            font-weight: 400;
+            color: #000000;
+        }
+        
+        /* --- LAYOUT PRINCIPAL --- */
+        .main .block-container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            padding-left: 5rem;
+            padding-right: 5rem;
+        }
 
-    .st-emotion-cache-1jmveez, .st-emotion-cache-1jmveez.e1fqp12o1 {
-        background-color: #ffffff;
-        border-radius: 0px;
-        border: 1px solid #e0e0e0;
-        box-shadow: none;
-    }
+        /* --- TARJETA DE PRODUCTO --- */
+        .perfume-card {
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .perfume-card:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .perfume-card img {
+            max-height: 180px;
+            margin-bottom: 15px;
+        }
+        .perfume-name {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #000;
+        }
+        .perfume-brand {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .perfume-price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 15px;
+        }
+        .dupe-section {
+            background-color: #e9e9e9;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
 
-    .st-emotion-cache-1r65h9z {
-        border: 1px solid #000000;
-        background-color: #ffffff;
-        color: #000000;
-        padding: 10px 20px;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        font-weight: 500;
-        transition: all 0.2s ease;
-    }
+        /* --- BOTONES --- */
+        .stButton>button {
+            width: 100%;
+            border: 2px solid #000;
+            background-color: #000;
+            color: #fff;
+            border-radius: 5px;
+            padding: 10px 0;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .stButton>button:hover {
+            background-color: #fff;
+            color: #000;
+        }
+        
+        /* Estilo específico para botones de compra */
+        a.buy-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px 0;
+            margin-top: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        a.original-button {
+            border: 1px solid #555;
+            background-color: transparent;
+            color: #555;
+        }
+        a.original-button:hover {
+            background-color: #555;
+            color: #fff;
+        }
+        a.dupe-button {
+            border: 1px solid #000;
+            background-color: #000;
+            color: #fff;
+        }
+        a.dupe-button:hover {
+            background-color: #333;
+            border-color: #333;
+        }
 
-    .st-emotion-cache-1r65h9z:hover {
-        background-color: #000000;
-        color: #ffffff;
-    }
+        /* --- FILTROS Y CONTROLES --- */
+        .stRadio, .stSelectbox, .stSlider {
+            margin-bottom: 1.5rem;
+        }
 
-    .stRadio > label {
-        font-weight: normal;
-        color: #000000;
-        font-family: 'Georgia', serif;
-    }
-
-    .stRadio [data-baseweb="radio"] {
-        border-color: #000000;
-    }
-
-    .stRadio [data-baseweb="radio"]:checked {
-        border-color: #000000;
-        background-color: #000000;
-    }
-
-    .stSelectbox > label, .stSlider > label {
-        color: #000000;
-        font-weight: normal;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-    }
-
-    .stWarning {
-        background-color: transparent;
-        border: none;
-        color: #555555;
-        font-style: italic;
-        padding-left: 0;
-        border-left: none;
-    }
-
-    .stWarning .st-emotion-cache-1dkeo0u {
-        display: none;
-    }
-
-    .st-emotion-cache-e1nz1l x {
-        text-align: center;
-    }
     </style>
     """, unsafe_allow_html=True)
 
-# Cargar el CSV
-try:
-    df = pd.read_csv('perfumes.csv')
-    generos = ['Hombre', 'Mujer', 'Unisex']
-    marcas = ['Todas'] + sorted(df['Marca'].unique().tolist())
-    tipos_aroma = ['Cualquiera'] + sorted(df['Tipo de aroma'].unique().tolist())
-    intensidades = ['Cualquiera'] + sorted(df['Intensidad'].unique().tolist())
-    ocasiones = ['Cualquiera'] + sorted(df['Ocasión'].unique().tolist())
-    df['Notas'] = df['Notas'].str.split(',')
-    all_notes = df['Notas'].explode().str.strip().unique().tolist()
-    notas = ['Cualquiera'] + sorted(all_notes)
-except FileNotFoundError:
-    st.error("Error: El archivo 'perfumes.csv' no se encontró. Por favor, asegúrate de haberlo subido a GitHub.")
-    st.stop()
+# --- CARGA DE DATOS (CON CACHÉ PARA MAYOR VELOCIDAD) ---
+@st.cache_data
+def load_data(file_path):
+    try:
+        df = pd.read_csv(file_path)
+        # Asegurarse de que las notas sean tratadas como strings antes de dividir
+        df['Notas'] = df['Notas'].astype(str).str.split(',')
+        return df
+    except FileNotFoundError:
+        st.error(f"Error: El archivo '{file_path}' no se encontró. Asegúrate de que el archivo está en el directorio correcto.")
+        return None
 
-# Logo y título
-st.markdown("<h1 style='text-align: center; font-size: 3em;'>YourParfum</h1>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; font-weight: 300;'>Encuentra tu aroma perfecto.</h3>", unsafe_allow_html=True)
-st.markdown("---")
+# --- FUNCIÓN PARA MOSTRAR UNA TARJETA DE PERFUME ---
+def display_perfume_card(perfume):
+    with st.container():
+        st.markdown(f"""
+        <div class="perfume-card">
+            <img src="{perfume['Imagen (URL)']}" alt="{perfume['Nombre']}">
+            <div class="perfume-name">{perfume['Nombre']}</div>
+            <div class="perfume-brand">{perfume['Marca']}</div>
+            <div class="perfume-price">{perfume['Precio (€)']} €</div>
+            <a href="{perfume['Enlace original']}" target="_blank" class="buy-button original-button">Comprar Original</a>
+            <div class="dupe-section">
+                💎 Dupe: <strong>{perfume['Dupe barato']}</strong>
+                <a href="{perfume['Enlace dupe']}" target="_blank" class="buy-button dupe-button">Comprar Dupe</a>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-# Nuevo filtro de género al inicio
-selected_genero = st.radio(
-    "Selecciona el género:",
-    generos,
-    horizontal=True
-)
+# --- LÓGICA PRINCIPAL DE LA APLICACIÓN ---
+def main():
+    load_css()
+    df = load_data('perfumes_corregido.csv')
 
-st.markdown("---")
+    if df is None:
+        return
 
-# Selección de modo
-modo = st.radio(
-    "Selecciona el modo de búsqueda:",
-    ("Guía Personalizada", "Explorar por Filtros"),
-    horizontal=True
-)
+    # --- CABECERA ---
+    st.markdown("<h1 style='text-align: center; font-size: 3.5em;'>YourParfum</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; font-weight: 300; margin-top: -20px;'>Encuentra tu aroma perfecto.</h3>", unsafe_allow_html=True)
+    st.markdown("---")
 
-st.markdown("---")
+    # --- SELECCIÓN DE GÉNERO Y MODO ---
+    cols_header = st.columns(2)
+    with cols_header[0]:
+        selected_genero = st.radio("PARA QUIÉN BUSCAS:", ['Hombre', 'Mujer', 'Unisex'], horizontal=True, key='genero')
+    with cols_header[1]:
+        modo = st.radio("MODO DE BÚSQUEDA:", ("Guía Personalizada", "Explorar Catálogo"), horizontal=True, key='modo')
+    
+    st.markdown("---")
+    
+    # Filtrar dataframe por género seleccionado
+    df_genero = df[df['Género'].isin([selected_genero, 'Unisex'])].copy()
 
-if modo == "Guía Personalizada":
-    st.header("Guía Personalizada")
-
-    with st.form("guia_form"):
-        aroma_preferido = st.selectbox("1. ¿Qué tipo de aroma te atrae más?", tipos_aroma[1:])
-        ocasion_uso = st.selectbox("2. ¿Para qué ocasión lo usarías?", ocasiones[1:])
-        intensidad_preferida = st.selectbox("3. ¿Qué intensidad prefieres en una fragancia?", intensidades[1:])
-        presupuesto = st.slider("4. ¿Cuál es tu presupuesto máximo (€)?", min_value=10, max_value=300, value=100, step=5)
+    # --- MODO: GUÍA PERSONALIZADA ---
+    if modo == "Guía Personalizada":
+        st.header("Guía Personalizada")
         
-        submitted = st.form_submit_button("¡Encontrar mi perfume!")
+        # Opciones para los filtros
+        tipos_aroma = sorted(df_genero['Tipo de aroma'].unique().tolist())
+        ocasiones = sorted(df_genero['Ocasión'].unique().tolist())
+        intensidades = sorted(df_genero['Intensidad'].unique().tolist())
 
-    if submitted:
-        resultados = df[
-            (df['Género'].isin([selected_genero, 'Unisex'])) &
-            (df['Tipo de aroma'] == aroma_preferido) &
-            (df['Ocasión'] == ocasion_uso) &
-            (df['Intensidad'] == intensidad_preferida) &
-            (df['Precio (€)'] <= presupuesto)
-        ]
+        with st.form("guia_form"):
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                aroma_preferido = st.selectbox("Tipo de aroma que te atrae:", tipos_aroma)
+            with col2:
+                ocasion_uso = st.selectbox("Ocasión de uso principal:", ocasiones)
+            with col3:
+                intensidad_preferida = st.selectbox("Intensidad preferida:", intensidades)
+            
+            presupuesto = st.slider("Presupuesto máximo (€):", min_value=df_genero['Precio (€)'].min(), max_value=df_genero['Precio (€)'].max(), value=150.0, step=5.0)
+            
+            submitted = st.form_submit_button("✨ ¡Encontrar mi perfume!")
+
+        if submitted:
+            st.markdown("---")
+            st.markdown("<h2 style='text-align: center;'>Tu recomendación ideal</h2>", unsafe_allow_html=True)
+            
+            # Lógica de búsqueda mejorada
+            resultados = df_genero[
+                (df_genero['Tipo de aroma'] == aroma_preferido) &
+                (df_genero['Ocasión'] == ocasion_uso) &
+                (df_genero['Intensidad'] == intensidad_preferida) &
+                (df_genero['Precio (€)'] <= presupuesto)
+            ]
+            # Si no hay resultados, buscar con menos criterios
+            if resultados.empty:
+                resultados = df_genero[
+                    (df_genero['Tipo de aroma'] == aroma_preferido) &
+                    (df_genero['Ocasión'] == ocasion_uso) &
+                    (df_genero['Precio (€)'] <= presupuesto)
+                ]
+            
+            if not resultados.empty:
+                # Mostrar hasta 3 recomendaciones en columnas
+                num_resultados = min(3, len(resultados))
+                cols = st.columns(num_resultados)
+                for i, (_, row) in enumerate(resultados.sample(num_resultados).iterrows()):
+                    with cols[i]:
+                        display_perfume_card(row)
+            else:
+                st.warning("No hemos encontrado una fragancia ideal. Prueba a ajustar los filtros o explora estas opciones populares:")
+                # Mostrar 3 opciones populares del género si falla la búsqueda
+                cols = st.columns(3)
+                for i, (_, row) in enumerate(df_genero.sample(3).iterrows()):
+                    with cols[i]:
+                        display_perfume_card(row)
+
+    # --- MODO: EXPLORAR CATÁLOGO ---
+    elif modo == "Explorar Catálogo":
+        st.header("Explorar Catálogo Completo")
+
+        # Columnas para los filtros
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            marcas = ['Todas'] + sorted(df_genero['Marca'].unique().tolist())
+            selected_marca = st.selectbox("Marca:", marcas)
+        with col2:
+            tipos_aroma = ['Cualquiera'] + sorted(df_genero['Tipo de aroma'].unique().tolist())
+            selected_tipo = st.selectbox("Tipo de aroma:", tipos_aroma)
+        with col3:
+            intensidades = ['Cualquiera'] + sorted(df_genero['Intensidad'].unique().tolist())
+            selected_intensidad = st.selectbox("Intensidad:", intensidades)
+        with col4:
+            ocasiones = ['Cualquiera'] + sorted(df_genero['Ocasión'].unique().tolist())
+            selected_ocasion = st.selectbox("Ocasión:", ocasiones)
         
-        st.markdown("<h3 style='text-align: center;'>Resultados</h3>", unsafe_allow_html=True)
+        # Aplicar filtros
+        filtros = (df_genero['Género'].isin([selected_genero, 'Unisex']))
+        if selected_marca != 'Todas': filtros &= (df_genero['Marca'] == selected_marca)
+        if selected_tipo != 'Cualquiera': filtros &= (df_genero['Tipo de aroma'] == selected_tipo)
+        if selected_intensidad != 'Cualquiera': filtros &= (df_genero['Intensidad'] == selected_intensidad)
+        if selected_ocasion != 'Cualquiera': filtros &= (df_genero['Ocasión'] == selected_ocasion)
+
+        resultados = df_genero[filtros]
+
+        st.markdown("---")
+        st.markdown(f"**Resultados encontrados: {len(resultados)}**")
 
         if not resultados.empty:
-            resultados_finales = resultados.sample(min(3, len(resultados)))
+            # Paginación y visualización en cuadrícula
+            resultados_por_pagina = 9
+            total_paginas = (len(resultados) - 1) // resultados_por_pagina + 1
+            if 'page' not in st.session_state: st.session_state.page = 1
             
-            for _, row in resultados_finales.iterrows():
-                st.markdown("<br>", unsafe_allow_html=True)
-                col1, col2 = st.columns([1, 2])
-                with col1:
-                    st.image(row['Imagen (URL)'], width=150)
-                with col2:
-                    st.markdown(f"**{row['Nombre']}** - {row['Marca']}")
-                    st.write(f"💰 Precio: {row['Precio (€)']}€")
-                    st.write(f"💎 Dupe: **{row['Dupe barato']}**")
-                    
-                    st.markdown(f"🛒 [Comprar Original]({row['Enlace original']})")
-                    st.markdown(f"🛒 [Comprar Dupe]({row['Enlace dupe']})")
-                    st.markdown("---")
-        else:
-            st.warning("No encontramos perfumes con esos criterios. Aquí tienes una recomendación popular:")
-            recomendacion_popular = df.sample(min(3, len(df)))
+            # Controles de paginación
+            pag_col1, pag_col2, pag_col3 = st.columns([1,2,1])
+            with pag_col1:
+                if st.button('⬅️ Anterior') and st.session_state.page > 1:
+                    st.session_state.page -= 1
+            with pag_col3:
+                if st.button('Siguiente ➡️') and st.session_state.page < total_paginas:
+                    st.session_state.page += 1
+            with pag_col2:
+                 st.write(f"Página {st.session_state.page} de {total_paginas}")
+
+            # Mostrar resultados de la página actual
+            start_idx = (st.session_state.page - 1) * resultados_por_pagina
+            end_idx = start_idx + resultados_por_pagina
             
-            for _, row in recomendacion_popular.iterrows():
-                st.markdown("<br>", unsafe_allow_html=True)
-                col1, col2 = st.columns([1, 2])
-                with col1:
-                    st.image(row['Imagen (URL)'], width=150)
-                with col2:
-                    st.markdown(f"**{row['Nombre']}** - {row['Marca']}")
-                    st.write(f"💰 Precio: {row['Precio (€)']}€")
-                    st.write(f"💎 Dupe: **{row['Dupe barato']}**")
-                    st.markdown(f"🛒 [Comprar Original]({row['Enlace original']})")
-                    st.markdown(f"🛒 [Comprar Dupe]({row['Enlace dupe']})")
-                    st.markdown("---")
-
-elif modo == "Explorar por Filtros":
-    st.header("Explorar por Filtros")
-    
-    selected_marca = st.selectbox("Elige una marca:", marcas)
-    selected_tipo = st.selectbox("Elige el tipo de aroma:", tipos_aroma)
-    selected_intensidad = st.selectbox("Elige la intensidad:", intensidades)
-    selected_ocasion = st.selectbox("Elige la ocasión:", ocasiones)
-    selected_nota = st.selectbox("Elige una nota olfativa:", notas)
-    
-    presupuesto = st.slider("Presupuesto máximo (€):", min_value=10, max_value=300, value=150, step=5)
-
-    filtros = (df['Precio (€)'] <= presupuesto)
-    filtros &= (df['Género'].isin([selected_genero, 'Unisex']))
-    if selected_marca != 'Todas':
-        filtros &= (df['Marca'] == selected_marca)
-    if selected_tipo != 'Cualquiera':
-        filtros &= (df['Tipo de aroma'] == selected_tipo)
-    if selected_intensidad != 'Cualquiera':
-        filtros &= (df['Intensidad'] == selected_intensidad)
-    if selected_ocasion != 'Cualquiera':
-        filtros &= (df['Ocasión'] == selected_ocasion)
-    if selected_nota != 'Cualquiera':
-        filtros &= (df['Notas'].apply(lambda x: selected_nota in [n.strip() for n in x]))
-
-    resultados = df[filtros].sort_values(by='Precio (€)').reset_index(drop=True)
-    
-    total_resultados = len(resultados)
-    st.markdown(f"**✨ Perfumes encontrados: {total_resultados}**")
-    
-    if not resultados.empty:
-        resultados_por_pagina = 6
-        if 'pagina_actual' not in st.session_state:
-            st.session_state.pagina_actual = 0
-            
-        col_izq, col_der = st.columns([1, 10])
-        with col_izq:
-            if st.session_state.pagina_actual > 0:
-                if st.button("⬅️ Anterior"):
-                    st.session_state.pagina_actual -= 1
-        with col_der:
-            if (st.session_state.pagina_actual + 1) * resultados_por_pagina < total_resultados:
-                if st.button("Siguiente ➡️"):
-                    st.session_state.pagina_actual += 1
-
-        inicio = st.session_state.pagina_actual * resultados_por_pagina
-        fin = inicio + resultados_por_pagina
-        resultados_pagina = resultados.iloc[inicio:fin]
-        
-        for i in range(0, len(resultados_pagina), 3):
-            cols = st.columns(3)
-            for j in range(3):
-                if i + j < len(resultados_pagina):
-                    row = resultados_pagina.iloc[i + j]
+            for i in range(start_idx, end_idx, 3):
+                cols = st.columns(3)
+                for j, (idx, row) in enumerate(resultados.iloc[i:i+3].iterrows()):
                     with cols[j]:
-                        st.image(row['Imagen (URL)'], width=150, use_column_width='auto')
-                        st.write(f"**{row['Nombre']}**")
-                        st.write(f"*{row['Marca']}*")
-                        st.write(f"💰 Precio: {row['Precio (€)']}€")
-                        st.write(f"💎 Dupe: **{row['Dupe barato']}**")
-                        st.markdown(f"🛒 [Comprar Original]({row['Enlace original']})")
-                        st.markdown(f"🛒 [Comprar Dupe]({row['Enlace dupe']})")
-                        st.markdown("---")
-    else:
-        st.warning("No encontramos perfumes con esos criterios. Prueba a cambiar los filtros.")
+                        display_perfume_card(row)
+        else:
+            st.warning("No hay perfumes que coincidan con tu búsqueda. Intenta con otros filtros.")
 
-st.markdown("---")
-st.markdown('<p style="text-align: center; color: grey;">Creado por Miguel Poza</p>', unsafe_allow_html=True)
+    # --- PIE DE PÁGINA ---
+    st.markdown("---")
+    st.markdown('<p style="text-align: center; color: grey;">Creado por Miguel Poza con 🖤</p>', unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    main()
     
