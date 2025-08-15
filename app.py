@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import random
+import base64
 
 # --- CONFIGURACIÓN DE LA PÁGINA ---
 st.set_page_config(
@@ -176,6 +177,20 @@ def load_css():
             border-bottom: 2px solid #000;
             color: #000;
         }
+        
+        /* Contenedor de progreso de la guía */
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 10px;
+            background-color: #000;
+            transition: width 0.5s ease-in-out;
+        }
     </style>
     """, unsafe_allow_html=True)
 
@@ -208,7 +223,7 @@ def load_data(file_path):
         return None
 
 # --- FUNCIÓN PARA MOSTRAR UNA TARJETA DE PERFUME REFINADA ---
-def display_perfume_card(perfume):
+def display_perfume_card(perfume, show_dupe=True, show_explanation=False, user_prefs=None):
     notes_formatted = ", ".join([note.capitalize() for note in perfume['Notas']])
     
     html_card = f"""
@@ -218,18 +233,51 @@ def display_perfume_card(perfume):
         <div class="perfume-brand">{perfume['Marca']}</div>
         
         <div class="perfume-notes">{notes_formatted}</div>
-        
+    """
+    
+    if show_explanation and user_prefs:
+        explanation = generate_explanation(perfume, user_prefs)
+        html_card += f"""
+        <div style="font-size: 0.9em; text-align: left; margin-top: 15px; padding: 10px; background-color: #fafafa; border-radius: 5px;">
+            <p><strong>¿Por qué te recomendamos este perfume?</strong></p>
+            <p style="margin-top: 5px; font-style: italic;">{explanation}</p>
+        </div>
+        """
+    
+    if show_dupe:
+        html_card += f"""
         <div class="dupe-section">
             <div class="dupe-title">Alternativa de <b>{perfume['Nombre']}</b></div>
             <div class="dupe-name">{perfume['Dupe barato']}</div>
         </div>
-        
+        """
+        html_card += f"""
         <a href="{perfume['Enlace dupe']}" target="_blank" class="buy-button dupe-button">Ver Dupe</a>
         <a href="{perfume['Enlace original']}" target="_blank" class="buy-button original-button">Ver Original</a>
-        
-    </div>
-    """
+        """
+    else:
+        html_card += f"""
+        <a href="{perfume['Enlace original']}" target="_blank" class="buy-button dupe-button">Comprar</a>
+        """
+    
+    html_card += "</div>"
     st.markdown(html_card, unsafe_allow_html=True)
+
+def generate_explanation(perfume, prefs):
+    explanation = f"Este perfume es perfecto para ti porque es de la familia de aromas **{perfume['Tipo de aroma']}**,"
+    
+    if 'Ocasión' in prefs and prefs['Ocasión'] in perfume['Ocasión']:
+        explanation += f" ideal para **{prefs['Ocasión']}**."
+    
+    if 'Intensidad' in prefs and prefs['Intensidad'] == perfume['Intensidad']:
+        explanation += f" Su intensidad es **{perfume['Intensidad']}**, justo lo que buscabas."
+        
+    if 'Notas' in prefs and prefs['Notas']:
+        matched_notes = [note.capitalize() for note in prefs['Notas'] if note in perfume['Notas']]
+        if matched_notes:
+            explanation += f" Además, contiene notas de {', '.join(matched_notes)}, que son de tu agrado."
+    
+    return explanation
 
 # --- ALGORITMO DE PUNTUACIÓN (SCORING) ---
 def score_perfumes(df, user_prefs):
@@ -271,7 +319,7 @@ def main():
 
     # --- CABECERA ---
     st.markdown("<h1 style='text-align: center; font-size: 3.5em;'>YourParfum</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center; font-weight: 300; margin-top: -20px;'>Encuentra tu aroma perfecto.</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; font-weight: 300; margin-top: -20px;'>Responde unas preguntas rápidas y nuestra IA te sugerirá el perfume ideal según tu estilo y ocasión.</h3>", unsafe_allow_html=True)
     st.markdown("---")
     
     # Inicializar estado de la sesión
@@ -279,24 +327,33 @@ def main():
         st.session_state.step = 0
         st.session_state.prefs = {}
         st.session_state.results = pd.DataFrame()
+        st.session_state.favorites = []
 
-    tab1, tab2 = st.tabs(["✨ Guía Personalizada", "🔎 Explorar Catálogo"])
+    tab1, tab2, tab3 = st.tabs(["✨ Guía Personalizada", "🔎 Explorar Catálogo", "❤️ Mis Favoritos"])
     
     # --- PESTAÑA 1: GUÍA PERSONALIZADA ---
     with tab1:
         st.header("Tu Recomendación Ideal")
         
+        # Barra de progreso
+        progress_percentage = (st.session_state.step / 3) * 100 if st.session_state.step < 3 else 100
+        st.markdown(f"""
+            <div class="progress-container">
+                <div class="progress-bar" style="width: {progress_percentage}%;"></div>
+            </div>
+        """, unsafe_allow_html=True)
+
         # Lógica del flujo de preguntas
         if st.session_state.step == 0:
-            st.markdown("<p style='text-align: center;'><b>Paso 1:</b> Para empezar, ¿para quién buscas?</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center;'><b>Paso 1 de 3:</b> ¿Para quién buscas?</p>", unsafe_allow_html=True)
             selected_genero = st.radio("", ['Hombre', 'Mujer', 'Unisex'], horizontal=True)
             if st.button("Siguiente", key="guia_siguiente_1"):
                 st.session_state.prefs['Género'] = selected_genero
                 st.session_state.step = 1
                 st.rerun()
-
+                
         elif st.session_state.step == 1:
-            st.markdown("<p style='text-align: center;'><b>Paso 2:</b> Ahora, elige el tipo de aroma y la ocasión.</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center;'><b>Paso 2 de 3:</b> Elige el tipo de aroma y la ocasión.</p>", unsafe_allow_html=True)
             df_genero = df[df['Género'].isin([st.session_state.prefs['Género'], 'Unisex'])].copy()
             
             col1, col2 = st.columns(2)
@@ -305,12 +362,18 @@ def main():
             with col2:
                 st.session_state.prefs['Ocasión'] = st.selectbox("Ocasión de uso:", sorted(df_genero['Ocasión'].unique().tolist()))
                 
-            if st.button("Siguiente", key="guia_siguiente_2"):
-                st.session_state.step = 2
-                st.rerun()
+            col_back, col_next = st.columns([1,1])
+            with col_back:
+                if st.button("⬅️ Atrás", key="guia_atras_1"):
+                    st.session_state.step = 0
+                    st.rerun()
+            with col_next:
+                if st.button("Siguiente", key="guia_siguiente_2"):
+                    st.session_state.step = 2
+                    st.rerun()
 
         elif st.session_state.step == 2:
-            st.markdown("<p style='text-align: center;'><b>Paso 3:</b> ¿Qué intensidad prefieres y cuál es tu presupuesto?</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center;'><b>Paso 3 de 3:</b> ¿Qué intensidad prefieres y cuál es tu presupuesto?</p>", unsafe_allow_html=True)
             df_genero = df[df['Género'].isin([st.session_state.prefs['Género'], 'Unisex'])].copy()
             
             col1, col2 = st.columns(2)
@@ -323,21 +386,38 @@ def main():
             user_notes = st.text_input("Notas (ej. vainilla, limón):", "")
             st.session_state.prefs['Notas'] = [note.strip().lower() for note in user_notes.split(',')] if user_notes else []
 
-            if st.button("Ver mi recomendación", key="guia_finalizar"):
-                df_filtrado = df[df['Género'].isin([st.session_state.prefs['Género'], 'Unisex'])].copy()
-                st.session_state.results = score_perfumes(df_filtrado, st.session_state.prefs)
-                st.session_state.step = 3
-                st.rerun()
+            col_back, col_final = st.columns([1,1])
+            with col_back:
+                if st.button("⬅️ Atrás", key="guia_atras_2"):
+                    st.session_state.step = 1
+                    st.rerun()
+            with col_final:
+                if st.button("Ver mi recomendación", key="guia_finalizar"):
+                    df_filtrado = df[df['Género'].isin([st.session_state.prefs['Género'], 'Unisex'])].copy()
+                    st.session_state.results = score_perfumes(df_filtrado, st.session_state.prefs)
+                    st.session_state.step = 3
+                    st.rerun()
 
         elif st.session_state.step == 3:
             
             if not st.session_state.results.empty:
                 st.header("✨ Tu Recomendación Principal ✨")
-                # Mostrar la mejor opción
+                
+                # Mostrar la mejor opción con explicación
                 mejor_opcion = st.session_state.results.iloc[0]
-                col_main = st.columns([1,1])
-                with col_main[0]:
-                    display_perfume_card(mejor_opcion)
+                display_perfume_card(mejor_opcion, show_dupe=True, show_explanation=True, user_prefs=st.session_state.prefs)
+
+                # Botones de acción
+                col_fav, col_restart = st.columns([1,1])
+                with col_fav:
+                    if st.button("❤️ Guardar en Favoritos", key=f"fav_{mejor_opcion.name}"):
+                        if mejor_opcion.name not in st.session_state.favorites:
+                            st.session_state.favorites.append(mejor_opcion.name)
+                            st.success(f"'{mejor_opcion['Nombre']}' ha sido guardado en tus favoritos.")
+                with col_restart:
+                    if st.button("Reiniciar Guía", key="reiniciar_guia_final"):
+                        st.session_state.step = 0
+                        st.rerun()
 
                 st.markdown("---")
                 st.header("Otras Opciones que te Encantarán")
@@ -348,16 +428,11 @@ def main():
                     cols_other = st.columns(len(otras_opciones))
                     for i, (idx, perfume) in enumerate(otras_opciones.iterrows()):
                         with cols_other[i]:
-                            display_perfume_card(perfume)
+                            display_perfume_card(perfume, show_dupe=True)
                 
-                st.markdown("---")
-                st.info("¿No te convence? Prueba a reiniciar la búsqueda.")
-                if st.button("Reiniciar Guía", key="reiniciar_guia"):
-                    st.session_state.step = 0
-                    st.rerun()
             else:
                 st.warning("No se encontraron perfumes que coincidan con tu búsqueda. Intenta con otros filtros.")
-                if st.button("Reiniciar Guía", key="reiniciar_guia"):
+                if st.button("Reiniciar Guía", key="reiniciar_guia_fail"):
                     st.session_state.step = 0
                     st.rerun()
 
@@ -417,26 +492,4 @@ def main():
                     st.rerun()
             with pag_col3:
                 if st.button('Siguiente ➡️', key="next_button") and st.session_state.page < total_paginas:
-                    st.session_state.page += 1
-                    st.rerun()
-            with pag_col2:
-                 st.write(f"Página {st.session_state.page} de {total_paginas}")
-
-            start_idx = (st.session_state.page - 1) * resultados_por_pagina
-            end_idx = start_idx + resultados_por_pagina
-            
-            for i in range(start_idx, end_idx, 3):
-                cols = st.columns(3)
-                for j, (idx, row) in enumerate(resultados.iloc[i:i+3].iterrows()):
-                    with cols[j]:
-                        display_perfume_card(row)
-        else:
-            st.warning("No hay perfumes que coincidan con tu búsqueda. Intenta con otros filtros.")
-
-    # --- PIE DE PÁGINA ---
-    st.markdown("---")
-    st.markdown('<p style="text-align: center; color: grey;">Creado por Miguel Poza con 🖤</p>', unsafe_allow_html=True)
-
-if __name__ == "__main__":
-    main()
-        
+                    st.sessi
