@@ -211,25 +211,25 @@ def load_data(file_path):
 def display_perfume_card(perfume):
     notes_formatted = ", ".join([note.capitalize() for note in perfume['Notas']])
     
-    with st.container():
-        st.markdown(f"""
-        <div class="perfume-card">
-            <img src="{perfume['Imagen (URL)']}" alt="{perfume['Nombre']}">
-            <div class="perfume-name">{perfume['Nombre']}</div>
-            <div class="perfume-brand">{perfume['Marca']}</div>
-            
-            <div class="perfume-notes">{notes_formatted}</div>
-            
-            <div class="dupe-section">
-                <div class="dupe-title">Alternativa de **{perfume['Nombre']}**</div>
-                <div class="dupe-name">{perfume['Dupe barato']}</div>
-            </div>
-            
-            <a href="{perfume['Enlace dupe']}" target="_blank" class="buy-button dupe-button">Ver Dupe</a>
-            <a href="{perfume['Enlace original']}" target="_blank" class="buy-button original-button">Ver Original</a>
-            
+    html_card = f"""
+    <div class="perfume-card">
+        <img src="{perfume['Imagen (URL)']}" alt="{perfume['Nombre']}" style="width:100%; max-width:200px; height:auto; margin-bottom: 20px;">
+        <div class="perfume-name">{perfume['Nombre']}</div>
+        <div class="perfume-brand">{perfume['Marca']}</div>
+        
+        <div class="perfume-notes">{notes_formatted}</div>
+        
+        <div class="dupe-section">
+            <div class="dupe-title">Alternativa de <b>{perfume['Nombre']}</b></div>
+            <div class="dupe-name">{perfume['Dupe barato']}</div>
         </div>
-        """, unsafe_allow_html=True)
+        
+        <a href="{perfume['Enlace dupe']}" target="_blank" class="buy-button dupe-button">Ver Dupe</a>
+        <a href="{perfume['Enlace original']}" target="_blank" class="buy-button original-button">Ver Original</a>
+        
+    </div>
+    """
+    st.markdown(html_card, unsafe_allow_html=True)
 
 # --- ALGORITMO DE PUNTUACIÓN (SCORING) ---
 def score_perfumes(df, user_prefs):
@@ -439,4 +439,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
+        
