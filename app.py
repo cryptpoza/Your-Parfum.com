@@ -18,20 +18,20 @@ st.markdown("""
         color: #222222;
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
-    
+
     h1, h2, h3, h4, h5, h6 {
         font-family: 'Georgia', serif;
         font-weight: 300;
         color: #000000;
     }
-    
+
     .st-emotion-cache-1jmveez, .st-emotion-cache-1jmveez.e1fqp12o1 {
         background-color: #ffffff;
         border-radius: 0px;
         border: 1px solid #e0e0e0;
         box-shadow: none;
     }
-    
+
     .st-emotion-cache-1r65h9z {
         border: 1px solid #000000;
         background-color: #ffffff;
@@ -42,7 +42,7 @@ st.markdown("""
         font-weight: 500;
         transition: all 0.2s ease;
     }
-    
+
     .st-emotion-cache-1r65h9z:hover {
         background-color: #000000;
         color: #ffffff;
@@ -53,11 +53,11 @@ st.markdown("""
         color: #000000;
         font-family: 'Georgia', serif;
     }
-    
+
     .stRadio [data-baseweb="radio"] {
         border-color: #000000;
     }
-    
+
     .stRadio [data-baseweb="radio"]:checked {
         border-color: #000000;
         background-color: #000000;
@@ -79,11 +79,11 @@ st.markdown("""
         padding-left: 0;
         border-left: none;
     }
-    
+
     .stWarning .st-emotion-cache-1dkeo0u {
         display: none;
     }
-    
+
     .st-emotion-cache-e1nz1l x {
         text-align: center;
     }
@@ -168,7 +168,7 @@ if modo == "Guía Personalizada":
                     st.markdown("---")
         else:
             st.warning("No encontramos perfumes con esos criterios. Aquí tienes una recomendación popular:")
-            recomendacion_popular = df.sample(min(3, len(df))]
+            recomendacion_popular = df.sample(min(3, len(df)))
             
             for _, row in recomendacion_popular.iterrows():
                 st.markdown("<br>", unsafe_allow_html=True)
@@ -250,4 +250,4 @@ elif modo == "Explorar por Filtros":
 
 st.markdown("---")
 st.markdown('<p style="text-align: center; color: grey;">Creado por Miguel Poza</p>', unsafe_allow_html=True)
-            
+    
