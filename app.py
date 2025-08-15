@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import random
 
 # --- CONFIGURACIÓN DE LA PÁGINA ---
 st.set_page_config(
@@ -9,7 +10,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-# --- ESTILOS CSS PARA UN DISEÑO PROFESIONAL ---
+# --- ESTILOS CSS PARA UN DISEÑO PROFESIONAL Y MINIMALISTA ---
 def load_css():
     st.markdown("""
     <style>
@@ -35,82 +36,71 @@ def load_css():
             padding-right: 5rem;
         }
 
-        /* --- TARJETA DE PRODUCTO --- */
+        /* --- TARJETA DE PRODUCTO REFINADA --- */
         .perfume-card {
-            background-color: #f9f9f9;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            padding: 20px;
+            border: none; /* Sin bordes para un look más limpio */
+            padding: 10px;
             margin-bottom: 20px;
             text-align: center;
-            transition: box-shadow 0.3s ease-in-out;
-        }
-        .perfume-card:hover {
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .perfume-card img {
-            max-height: 180px;
-            margin-bottom: 15px;
+            max-height: 200px;
+            margin-bottom: 20px;
         }
         .perfume-name {
             font-size: 1.1em;
-            font-weight: 600;
+            font-weight: 500; /* Letra más fina */
             color: #000;
+            text-transform: uppercase; /* MAYÚSCULAS como en Zara */
+            letter-spacing: 0.05em;
         }
         .perfume-brand {
             color: #666;
-            margin-bottom: 10px;
-        }
-        .perfume-price {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #000;
             margin-bottom: 15px;
-        }
-        .dupe-section {
-            background-color: #e9e9e9;
-            padding: 10px;
-            border-radius: 4px;
-            margin-top: 15px;
-        }
-
-        /* --- BOTONES --- */
-        .stButton>button {
-            width: 100%;
-            border: 2px solid #000;
-            background-color: #000;
-            color: #fff;
-            border-radius: 5px;
-            padding: 10px 0;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-        .stButton>button:hover {
-            background-color: #fff;
-            color: #000;
+            font-size: 0.9em;
         }
         
-        /* Estilo específico para botones de compra */
+        /* Estilo refinado para el precio */
+        .perfume-price {
+            font-size: 1.1em;
+            font-weight: 400;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        /* Nueva sección para el dupe, sin fondo y minimalista */
+        .dupe-section {
+            border-top: 1px solid #eee; /* Un separador sutil */
+            padding-top: 15px;
+            margin-top: 20px;
+        }
+        .dupe-title {
+            font-size: 0.8em;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .dupe-name {
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        /* --- BOTONES MINIMALISTAS --- */
         a.buy-button {
-            display: block;
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            padding: 10px 0;
-            margin-top: 8px;
-            font-weight: bold;
+            display: block; width: 100%; text-align: center; text-decoration: none;
+            border-radius: 0; /* Sin bordes redondeados */
+            padding: 12px 0; margin-top: 8px; font-weight: 500;
             transition: all 0.3s ease;
+            letter-spacing: 0.05em;
         }
         a.original-button {
-            border: 1px solid #555;
+            border: 1px solid #000;
             background-color: transparent;
-            color: #555;
+            color: #000;
         }
         a.original-button:hover {
-            background-color: #555;
+            background-color: #000;
             color: #fff;
         }
         a.dupe-button {
@@ -122,12 +112,6 @@ def load_css():
             background-color: #333;
             border-color: #333;
         }
-
-        /* --- FILTROS Y CONTROLES --- */
-        .stRadio, .stSelectbox, .stSlider {
-            margin-bottom: 1.5rem;
-        }
-
     </style>
     """, unsafe_allow_html=True)
 
@@ -146,19 +130,25 @@ def load_data(file_path):
 # --- FUNCIÓN PARA MOSTRAR UNA TARJETA DE PERFUME ---
 def display_perfume_card(perfume):
     with st.container():
+        # Usamos st.markdown para tener control total con HTML y CSS
         st.markdown(f"""
         <div class="perfume-card">
             <img src="{perfume['Imagen (URL)']}" alt="{perfume['Nombre']}">
             <div class="perfume-name">{perfume['Nombre']}</div>
             <div class="perfume-brand">{perfume['Marca']}</div>
+            
             <div class="perfume-price">{perfume['Precio (€)']} €</div>
+            
             <a href="{perfume['Enlace original']}" target="_blank" class="buy-button original-button">Comprar Original</a>
+            
             <div class="dupe-section">
-                💎 Dupe: <strong>{perfume['Dupe barato']}</strong>
-                <a href="{perfume['Enlace dupe']}" target="_blank" class="buy-button dupe-button">Comprar Dupe</a>
+                <div class="dupe-title">Alternativa / Dupe</div>
+                <div class="dupe-name">{perfume['Dupe barato']}</div>
+                <a href="{perfume['Enlace dupe']}" target="_blank" class="buy-button dupe-button">Comprar Alternativa</a>
             </div>
         </div>
         """, unsafe_allow_html=True)
+
 
 # --- LÓGICA PRINCIPAL DE LA APLICACIÓN ---
 def main():
@@ -307,4 +297,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    Los cambios te los dije antes
+    
