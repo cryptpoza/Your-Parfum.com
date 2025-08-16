@@ -1,4 +1,4 @@
- import pandas as pd
+import pandas as pd
 import streamlit as st
 import random
 
@@ -402,3 +402,34 @@ def main():
 
         if not resultados.empty:
             for i in range(0, len(resultados), 3):
+                cols = st.columns(3)
+                for j, (idx, row) in enumerate(resultados.iloc[i:i+3].iterrows()):
+                    with cols[j]:
+                        display_perfume_card(row)
+        else:
+            st.warning("No hay perfumes que coincidan con tu búsqueda. Intenta con otros filtros.")
+    
+    # --- AVISO DE PRIVACIDAD Y COOKIES ---
+    with st.expander("Información sobre la IA y la fuente de datos"):
+        st.write("""
+        **¿Cómo funciona nuestra IA?**
+        
+        Nuestro sistema de recomendación utiliza un algoritmo que puntúa cada perfume en función de tus preferencias. 
+        Consideramos el tipo de aroma, la ocasión, la intensidad, tus notas preferidas y el presupuesto para encontrar la mejor coincidencia.
+        
+        **Fuente de datos:**
+        
+        La base de datos de perfumes ha sido creada a partir de información pública de marcas y distribuidores.
+        """)
+
+    # --- PIE DE PÁGINA ---
+    st.markdown("---")
+    st.markdown("""
+    <div style="text-align: center; color: grey;">
+        <p>Creado por Miguel Poza con 🖤</p>
+        <p><a href="#">Política de Privacidad</a> | <a href="#">Aviso de Cookies</a></p>
+    </div>
+    """, unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    main()
