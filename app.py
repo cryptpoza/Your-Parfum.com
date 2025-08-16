@@ -1,5 +1,3 @@
-
-
  import pandas as pd
 import streamlit as st
 import random
@@ -404,4 +402,3 @@ def main():
 
         if not resultados.empty:
             for i in range(0, len(resultados), 3):
-    
