@@ -10,209 +10,52 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-# --- ESTILOS CSS PARA UN DISEÑO PROFESIONAL Y MINIMALISTA ---
+# --- ESTILOS CSS MEJORADOS ---
 def load_css():
     st.markdown("""
     <style>
         /* --- FUENTES Y COLORES BASE --- */
         html, body, [class*="st-"] {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: #FFFFFF; /* Fondo blanco puro */
-            color: #1a1a1a; /* Negro suave para texto */
+            background-color: #FFFFFF;
+            color: #1a1a1a;
         }
 
         /* --- TÍTULOS Y CABECERAS --- */
         h1, h2, h3 {
-            font-family: 'Garamond', 'Georgia', serif; /* Fuente más elegante */
+            font-family: 'Garamond', 'Georgia', serif;
             font-weight: 400;
             color: #000000;
         }
         
-        /* --- LAYOUT PRINCIPAL --- */
-        .main .block-container {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-            padding-left: 5rem;
-            padding-right: 5rem;
+        /* --- MEJORAS DE DISEÑO --- */
+        .perfume-card img {
+            max-height: 250px;  /* Imágenes más grandes */
         }
         
-        /* Contenedor de la guía personalizada para centrarla */
         .guide-container {
             width: 70%;
             margin: 0 auto;
             text-align: center;
         }
         
-        /* Botón de reinicio */
-        .stButton>button {
-            border-radius: 0;
-            border: 1px solid #000;
-            color: #000;
-            background-color: transparent;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            transition: all 0.3s ease;
-        }
-        .stButton>button:hover {
-            background-color: #000;
-            color: #fff;
-        }
-
-        /* --- BARRA DE BÚSQUEDA --- */
-        div.stTextInput>div>div>input {
-            border: 1px solid #ccc;
-            padding: 10px 15px;
-            border-radius: 0;
-            box-shadow: none;
-        }
-        div.stTextInput>div>div>input:focus {
-            border-color: #000;
-            box-shadow: none;
-        }
-
-        /* --- TARJETA DE PRODUCTO REFINADA --- */
-        .perfume-card {
-            border: none;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-            transition: all 0.3s ease-in-out;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .perfume-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
-        }
-        .perfume-card img {
-            max-height: 250px;  /* Imágenes más grandes */
-            margin-bottom: 20px;
-            object-fit: contain;
-        }
-        .perfume-name {
-            font-size: 1.1em;
-            font-weight: 500;
-            color: #000;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .perfume-brand {
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 0.9em;
-        }
-        
-        /* Notas Olfativas */
-        .perfume-notes {
-            font-size: 0.8em;
-            color: #888;
-            margin-bottom: 15px;
-            font-style: italic;
-            flex-grow: 1;
-        }
-
-        /* Nueva sección para el dupe, sin fondo y minimalista */
-        .dupe-section {
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-            margin-top: 20px;
-        }
-        .dupe-title {
-            font-size: 0.8em;
-            color: #888;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-        .dupe-name {
-            font-weight: 500;
-            color: #000;
-            margin-bottom: 10px;
-        }
-        
-        .card-buttons {
-            margin-top: auto;
-        }
-
-        /* --- BOTONES MINIMALISTAS --- */
-        a.buy-button {
-            display: block; width: 100%; text-align: center; text-decoration: none;
-            border-radius: 4px;
-            padding: 12px 0; margin-top: 8px; font-weight: 500;
-            transition: all 0.3s ease;
-            letter-spacing: 0.05em;
-        }
-        a.original-button {
-            border: 1px solid #000;
-            background-color: transparent;
-            color: #000;
-        }
-        a.original-button:hover {
-            background-color: #000;
-            color: #fff;
-        }
-        a.dupe-button {
-            border: 1px solid #000;
-            background-color: #000;
-            color: #fff;
-        }
-        a.dupe-button:hover {
-            background-color: #333;
-            border-color: #333;
-        }
-
-        /* Estilos de las pestañas */
-        .st-emotion-cache-1jicfl2 button {
-            border: none;
-            border-radius: 0;
-            padding: 10px 20px;
-            margin-right: 10px;
-            background-color: transparent;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-        }
-        .st-emotion-cache-1jicfl2 button[aria-selected="true"] {
-            border-bottom: 2px solid #000;
-            color: #000;
-        }
-        
-        /* Barra de progreso */
-        .stProgress > div > div > div > div {
-            background-color: #000;
-        }
-
-        /* Explicación de la recomendación */
-        .recommendation-explanation {
-            background-color: #f0f2f6;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border-left: 4px solid #000;
-        }
-        
-        /* Botones de selección */
-        .option-button {
+        /* Botones de selección estilo tarjeta */
+        .option-card {
             border: 1px solid #ddd;
             padding: 15px;
+            border-radius: 8px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            border-radius: 4px;
-            background-color: white;
-            width: 100%;
             margin-bottom: 10px;
         }
-        .option-button:hover {
+        .option-card:hover {
             border-color: #000;
             background-color: #f9f9f9;
         }
-        .option-button.selected {
+        .option-card.selected {
             border: 2px solid #000;
             background-color: #fff;
-            font-weight: bold;
         }
         
         /* Mensaje de transparencia IA */
@@ -229,6 +72,7 @@ def load_css():
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
         header {visibility: hidden;}
+        .stDeployButton {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
 
@@ -237,17 +81,15 @@ def load_css():
 def load_data(file_path):
     try:
         df = pd.read_csv(file_path)
-        # Procesar la columna de notas
         df['Notas'] = df['Notas'].astype(str).str.split(',').apply(lambda x: [item.strip().lower() for item in x])
-        # Crear una columna de popularidad ficticia para el scoring
         df['Popularidad'] = df.index.map(lambda i: (len(df) - i) * random.uniform(0.8, 1.2))
         return df
     except FileNotFoundError:
-        st.error(f"Error: El archivo '{file_path}' no se encontró. Asegúrate de que el archivo está en la misma carpeta.")
+        st.error(f"Error: Archivo no encontrado. Verifica que '{file_path}' esté en el directorio.")
         return None
 
-# --- FUNCIÓN PARA MOSTRAR UNA TARJETA DE PERFUME REFINADA ---
-def display_perfume_card(perfume, show_dupe=True):
+# --- FUNCIÓN PARA MOSTRAR PERFUME ---
+def display_perfume_card(perfume):
     notes_formatted = ", ".join([note.capitalize() for note in perfume['Notas']])
     
     html_card = f"""
@@ -261,7 +103,7 @@ def display_perfume_card(perfume, show_dupe=True):
         <div class="card-buttons">
     """
     
-    if show_dupe and pd.notna(perfume['Dupe barato']):
+    if pd.notna(perfume['Dupe barato']):
         html_card += f"""
             <div class="dupe-section">
                 <div class="dupe-title">Alternativa de <b>{perfume['Nombre']}</b></div>
@@ -277,9 +119,8 @@ def display_perfume_card(perfume, show_dupe=True):
     """
     st.markdown(html_card, unsafe_allow_html=True)
 
-# --- ALGORITMO DE PUNTUACIÓN (SCORING) ---
+# --- ALGORITMO DE RECOMENDACIÓN ---
 def score_perfumes(df, user_prefs):
-    df['score'] = 0.0
     df['score'] = df['Popularidad']
 
     if 'Tipo de aroma' in user_prefs:
@@ -296,7 +137,7 @@ def score_perfumes(df, user_prefs):
     df = df[df['Precio (€)'] <= user_prefs.get('Presupuesto', 1000)].copy()
     return df.sort_values(by='score', ascending=False)
 
-# --- LÓGICA PRINCIPAL DE LA APLICACIÓN ---
+# --- LÓGICA PRINCIPAL ---
 def main():
     load_css()
     df = load_data('perfumes_corregido.csv')
@@ -304,13 +145,13 @@ def main():
     if df is None:
         return
 
-    # --- CABECERA ---
+    # --- CABECERA MEJORADA ---
     st.markdown("<h1 style='text-align: center; font-size: 3.5em;'>YourParfum</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center; font-weight: 300; margin-top: -20px;'>Tu aroma perfecto, descubierto por IA</h3>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center;'>¡Bienvenido! Descubre tu perfume ideal en 3 sencillos pasos o explora nuestro catálogo.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center;'>¡Bienvenido! Descubre tu perfume ideal en 3 sencillos pasos.</p>", unsafe_allow_html=True)
     st.markdown("---")
     
-    # Inicializar estado de la sesión
+    # Estado de sesión
     if 'step' not in st.session_state:
         st.session_state.step = 0
         st.session_state.prefs = {}
@@ -318,21 +159,21 @@ def main():
 
     tab1, tab2 = st.tabs(["✨ Guía Personalizada", "🔎 Explorar Catálogo"])
     
-    # --- PESTAÑA 1: GUÍA PERSONALIZADA ---
+    # --- GUÍA PERSONALIZADA MEJORADA ---
     with tab1:
         progress_bar = st.progress(0, text="Progreso del cuestionario")
         
-        # Lógica del flujo de preguntas
         if st.session_state.step == 0:
             progress_bar.progress(25, text="Paso 1 de 3")
             st.markdown("<p style='text-align: center;'><b>Paso 1:</b> ¡Empecemos! ¿Para quién buscas perfume?</p>", unsafe_allow_html=True)
             
-            col1, col2, col3 = st.columns([1,1,1])
+            col1, col2, col3 = st.columns(3)
             options = ['Hombre', 'Mujer', 'Unisex']
             
             for i, option in enumerate(options):
                 with [col1, col2, col3][i]:
-                    if st.button(option, key=f"gender_{option}", use_container_width=True):
+                    if st.button(option, key=f"gender_{option}", use_container_width=True, 
+                                help=f"Selecciona perfumes para {option}"):
                         st.session_state.prefs['Género'] = option
                         st.session_state.step = 1
                         st.rerun()
@@ -342,22 +183,26 @@ def main():
             st.markdown("<p style='text-align: center;'><b>Paso 2:</b> Selecciona tus preferencias de aroma</p>", unsafe_allow_html=True)
             df_genero = df[df['Género'].isin([st.session_state.prefs['Género'], 'Unisex'])].copy()
             
-            # Selector de tipo de aroma con botones
+            # Selector de tipo de aroma con tarjetas
             st.markdown("**Tipo de aroma:**")
             tipos = sorted(df_genero['Tipo de aroma'].unique().tolist())
             cols = st.columns(len(tipos))
             for i, tipo in enumerate(tipos):
                 with cols[i]:
+                    st.markdown(f'<div class="option-card" onclick="this.classList.toggle(\'selected\')">{tipo}</div>', 
+                               unsafe_allow_html=True)
                     if st.button(tipo, key=f"tipo_{tipo}", use_container_width=True):
                         st.session_state.prefs['Tipo de aroma'] = tipo
             
-            # Selector de ocasión con botones
+            # Selector de ocasión con tarjetas
             if 'Tipo de aroma' in st.session_state.prefs:
                 st.markdown("**Ocasión de uso:**")
                 ocasiones = sorted(df_genero['Ocasión'].unique().tolist())
                 cols_ocasion = st.columns(len(ocasiones))
                 for i, ocasion in enumerate(ocasiones):
                     with cols_ocasion[i]:
+                        st.markdown(f'<div class="option-card" onclick="this.classList.toggle(\'selected\')">{ocasion}</div>', 
+                                   unsafe_allow_html=True)
                         if st.button(ocasion, key=f"ocasion_{ocasion}", use_container_width=True):
                             st.session_state.prefs['Ocasión'] = ocasion
             
@@ -372,16 +217,18 @@ def main():
             st.markdown("<p style='text-align: center;'><b>Paso 3:</b> Preferencias finales</p>", unsafe_allow_html=True)
             df_genero = df[df['Género'].isin([st.session_state.prefs['Género'], 'Unisex'])].copy()
             
-            # Selector de intensidad con botones
+            # Intensidad con tarjetas
             st.markdown("**Intensidad preferida:**")
             intensidades = sorted(df_genero['Intensidad'].unique().tolist())
             cols_intensidad = st.columns(len(intensidades))
             for i, intensidad in enumerate(intensidades):
                 with cols_intensidad[i]:
+                    st.markdown(f'<div class="option-card" onclick="this.classList.toggle(\'selected\')">{intensidad}</div>', 
+                               unsafe_allow_html=True)
                     if st.button(intensidad, key=f"intensidad_{intensidad}", use_container_width=True):
                         st.session_state.prefs['Intensidad'] = intensidad
             
-            # Filtro de presupuesto
+            # Presupuesto
             if 'Intensidad' in st.session_state.prefs:
                 st.markdown("**Presupuesto máximo (€):**")
                 max_price = int(df['Precio (€)'].max())
@@ -391,9 +238,11 @@ def main():
                     label_visibility="collapsed"
                 )
                 
-                # Notas opcionales
+                # Notas con autocompletar sugerido
                 st.markdown("**Notas preferidas (opcional):**")
-                user_notes = st.text_input("Escribe tus notas favoritas separadas por comas (ej: vainilla, limón, madera):", "", label_visibility="collapsed")
+                all_notes = set([note for sublist in df['Notas'] for note in sublist])
+                user_notes = st.text_input("Ej: vainilla, limón, madera", "", 
+                                          help="Escribe tus notas favoritas separadas por comas")
                 st.session_state.prefs['Notas'] = [note.strip().lower() for note in user_notes.split(',')] if user_notes else []
 
                 if st.button("✨ Encontrar mi perfume ideal ✨", key="guia_finalizar", use_container_width=True):
@@ -409,13 +258,13 @@ def main():
                 st.header("✨ Tu Recomendación Principal ✨")
                 mejor_opcion = st.session_state.results.iloc[0]
                 
-                # Explicación de la recomendación
+                # Explicación IA
                 st.markdown(f"""
                 <div class="recommendation-explanation">
                     <h4>¿Por qué te recomendamos <b>{mejor_opcion['Nombre']}</b>?</h4>
                     <p>Basado en tus preferencias de <strong>{st.session_state.prefs.get('Tipo de aroma', 'aroma')}</strong>, 
                     intensidad <strong>{st.session_state.prefs.get('Intensidad', 'media')}</strong> 
-                    para ocasiones <strong>{st.session_state.prefs.get('Ocasión', 'diarias')}</strong>.</p>
+                    para <strong>{st.session_state.prefs.get('Ocasión', 'diarias')}</strong>.</p>
                     <div class="ai-transparency">
                         <strong>¿Cómo funciona nuestra IA?</strong><br>
                         Nuestro algoritmo analiza tus preferencias y las compara con más de {len(df)} perfumes, 
@@ -439,30 +288,19 @@ def main():
                             display_perfume_card(perfume)
                 
                 st.markdown("---")
-                col1, col2 = st.columns(2)
-                with col1:
-                    if st.button("Volver al catálogo", key="volver_catalogo", use_container_width=True):
-                        st.session_state.step = 0
-                        st.rerun()
-                with col2:
-                    if st.button("Reiniciar Guía", key="reiniciar_guia", use_container_width=True):
-                        st.session_state.step = 0
-                        st.session_state.prefs = {}
-                        st.rerun()
-            else:
-                st.warning("No encontramos perfumes que coincidan con tus preferencias. Prueba ajustando tus criterios.")
-                if st.button("Reiniciar Guía", key="reiniciar_guia_fail", use_container_width=True):
+                if st.button("Reiniciar Guía", key="reiniciar_guia", use_container_width=True):
                     st.session_state.step = 0
+                    st.session_state.prefs = {}
                     st.rerun()
 
-    # --- PESTAÑA 2: EXPLORAR CATÁLOGO ---
+    # --- CATÁLOGO MEJORADO ---
     with tab2:
         st.header("Explora nuestro catálogo completo")
         
         selected_genero_catalogo = st.radio("PARA QUIÉN BUSCAS:", ['Hombre', 'Mujer', 'Unisex'], horizontal=True, key='genero_catalogo')
         df_catalogo = df[df['Género'].isin([selected_genero_catalogo, 'Unisex'])].copy()
 
-        search_term = st.text_input('Buscar por nombre, marca o notas:', '').strip().lower()
+        search_term = st.text_input('Buscar por nombre, marca o notas:', '', placeholder="Escribe para buscar...")
         
         col1, col2, col3, col4 = st.columns(4)
         with col1:
@@ -486,6 +324,7 @@ def main():
                               value=(min_price, max_price), step=5,
                               label_visibility="collapsed")
         
+        # Aplicar filtros
         filtros = (df_catalogo['Género'].isin([selected_genero_catalogo, 'Unisex']))
         if selected_marca != 'Todas': filtros &= (df_catalogo['Marca'] == selected_marca)
         if selected_tipo != 'Cualquiera': filtros &= (df_catalogo['Tipo de aroma'] == selected_tipo)
@@ -493,4 +332,32 @@ def main():
         if selected_ocasion != 'Cualquiera': filtros &= (df_catalogo['Ocasión'] == selected_ocasion)
         filtros &= (df_catalogo['Precio (€)'] >= price_range[0]) & (df_catalogo['Precio (€)'] <= price_range[1])
 
-      
+        if search_term:
+            filtros &= df_catalogo.apply(lambda row: 
+                search_term.lower() in str(row['Nombre']).lower() or 
+                search_term.lower() in str(row['Marca']).lower() or 
+                any(search_term.lower() in note.lower() for note in row['Notas']), axis=1)
+
+        resultados = df_catalogo[filtros]
+        st.markdown("---")
+        st.markdown(f"**Perfumes encontrados: {len(resultados)}**")
+
+        if not resultados.empty:
+            cols = st.columns(3)
+            for i, (idx, perfume) in enumerate(resultados.iterrows()):
+                with cols[i % 3]:
+                    display_perfume_card(perfume)
+        else:
+            st.warning("No encontramos perfumes con esos filtros. Prueba ajustando tus criterios.")
+    
+    # --- FOOTER CON INFORMACIÓN DE AFILIADOS ---
+    st.markdown("---")
+    st.markdown("""
+    <div style="text-align: center; font-size: 0.85em; color: #666; padding: 20px;">
+        <p>Algunos enlaces son de afiliados. Si realizas una compra a través de ellos, 
+        podemos recibir una comisión sin costo adicional para ti. Esto nos ayuda a mantener el servicio.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    main()
